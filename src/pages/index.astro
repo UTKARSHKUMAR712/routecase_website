@@ -1,6 +1,6 @@
 ---
-// RouteCase Official Marketing Homepage
-// Creator & Lead Engineer: Utkarsh Kumar (utkarshkumar712)
+// RouteCase Official Marketing & Product Portal
+// Creator & Lead Software Engineer: Utkarsh Kumar (utkarshkumar712)
 // GitHub: https://github.com/UTKARSHKUMAR712
 // LinkedIn: https://www.linkedin.com/in/utkarsh-kumar-8344b1337
 ---
@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RouteCase — Modern In-Editor API Route & Endpoint Testing for VS Code</title>
     <meta name="description" content="RouteCase by Utkarsh Kumar (utkarshkumar712): Lightweight, declarative, 100% offline VS Code extension for running API route tests directly inside your editor with Jupyter-style CodeLens actions." />
-    <meta name="keywords" content="RouteCase, API testing, VS Code extension, REST API, JSON testing, CodeLens, Utkarsh Kumar, utkarshkumar712, OpenAPI importer, cURL" />
+    <meta name="keywords" content="RouteCase, API testing, VS Code extension, REST API, JSON testing, CodeLens, Utkarsh Kumar, utkarshkumar712, OpenAPI importer, cURL, developer tools" />
     <meta name="author" content="Utkarsh Kumar (utkarshkumar712)" />
     <meta name="creator" content="Utkarsh Kumar" />
     <meta name="publisher" content="Utkarsh Kumar" />
@@ -81,45 +81,105 @@
     </script>
 
     <link rel="stylesheet" href="/src/styles/custom.css" />
+
     <style>
+      /* --- Scoped Modern Design Tokens & Layout --- */
       :root {
-        --rc-bg: #0B0F17;
-        --rc-card: #111723;
+        --rc-bg: #070A0F;
+        --rc-bg-alt: #0D131F;
+        --rc-card: #111724;
+        --rc-card-hover: #162032;
         --rc-border: rgba(255, 255, 255, 0.08);
+        --rc-border-bright: rgba(16, 185, 129, 0.35);
         --rc-text: #F8FAFC;
         --rc-text-muted: #94A3B8;
         --rc-emerald: #10B981;
+        --rc-emerald-dark: #059669;
         --rc-mint: #34D399;
+        --rc-amber: #F59E0B;
+        --rc-font-mono: ui-monospace, 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace;
       }
+
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         margin: 0;
-        background: var(--rc-bg);
+        background-color: var(--rc-bg);
         color: var(--rc-text);
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         line-height: 1.6;
         overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
       }
+
+      /* Dot grid background texture */
+      .bg-grid-pattern {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1400px;
+        background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+        background-size: 28px 28px;
+        mask-image: linear-gradient(180deg, #000 65%, transparent 100%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* Radial light spotlights */
+      .spotlight-top {
+        position: absolute;
+        top: -120px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 800px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.03) 45%, transparent 70%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .spotlight-middle {
+        position: absolute;
+        top: 1300px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1000px;
+        height: 700px;
+        background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 65%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
       .container {
-        max-width: 1200px;
+        max-width: 1240px;
         margin: 0 auto;
         padding: 0 1.5rem;
+        position: relative;
+        z-index: 1;
       }
-      /* Header */
+
+      /* --- Navigation Bar --- */
       header {
-        border-bottom: 1px solid var(--rc-border);
-        background: rgba(11, 15, 23, 0.85);
-        backdrop-filter: blur(12px);
         position: sticky;
         top: 0;
-        z-index: 50;
+        z-index: 100;
+        background: rgba(7, 10, 15, 0.82);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--rc-border);
       }
+
       .nav-inner {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: 64px;
+        height: 68px;
       }
-      .logo-link {
+
+      .logo-brand {
         display: flex;
         align-items: center;
         gap: 12px;
@@ -127,398 +187,1690 @@
         color: #fff;
         font-weight: 700;
         font-size: 1.25rem;
+        letter-spacing: -0.02em;
       }
-      .logo-img {
-        width: 32px;
-        height: 32px;
-        border-radius: 8px;
+
+      .logo-icon-wrap {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid rgba(16, 185, 129, 0.35);
+        box-shadow: 0 0 16px rgba(16, 185, 129, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #0E1624;
       }
+
+      .logo-icon-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .logo-version-tag {
+        font-family: var(--rc-font-mono);
+        font-size: 0.72rem;
+        font-weight: 600;
+        padding: 2px 7px;
+        border-radius: 9999px;
+        background: rgba(16, 185, 129, 0.12);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        color: var(--rc-mint);
+        margin-left: 4px;
+      }
+
       .nav-links {
         display: flex;
         align-items: center;
-        gap: 1.5rem;
+        gap: 1.75rem;
       }
-      .nav-links a {
+
+      .nav-link {
         color: var(--rc-text-muted);
         text-decoration: none;
-        font-size: 0.95rem;
+        font-size: 0.92rem;
         font-weight: 500;
-        transition: color 0.2s;
+        transition: color 0.18s ease;
       }
-      .nav-links a:hover {
-        color: #fff;
+
+      .nav-link:hover {
+        color: #FFFFFF;
       }
-      .btn-primary {
-        background: var(--rc-emerald);
-        color: #fff;
-        padding: 9px 18px;
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .btn-install-nav {
+        background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+        color: #FFFFFF;
+        padding: 8px 16px;
         border-radius: 8px;
         font-weight: 600;
-        font-size: 0.9rem;
+        font-size: 0.88rem;
         text-decoration: none;
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        transition: all 0.2s;
-        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       }
-      .btn-primary:hover {
-        background: #059669;
+
+      .btn-install-nav:hover {
         transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
       }
-      .btn-secondary {
-        background: #1E293B;
-        color: #F8FAFC;
-        padding: 9px 18px;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 0.9rem;
-        text-decoration: none;
+
+      .mobile-menu-btn {
+        display: none;
+        background: transparent;
         border: 1px solid var(--rc-border);
-        transition: all 0.2s;
+        border-radius: 8px;
+        padding: 8px;
+        color: var(--rc-text-muted);
+        cursor: pointer;
       }
-      .btn-secondary:hover {
-        background: #334155;
+
+      /* Mobile Drawer */
+      .mobile-drawer {
+        display: none;
+        padding: 1.5rem;
+        background: #0B0F17;
+        border-bottom: 1px solid var(--rc-border);
+        flex-direction: column;
+        gap: 1.25rem;
       }
-      /* Hero */
-      .hero-section {
-        padding: 5rem 0 3rem 0;
+
+      .mobile-drawer.open {
+        display: flex;
+      }
+
+      /* --- Hero Section --- */
+      .hero-wrap {
+        padding: 5.5rem 0 3.5rem 0;
         text-align: center;
       }
-      .hero-badge {
+
+      .status-pill {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        padding: 6px 16px;
+        gap: 10px;
+        padding: 6px 18px;
         border-radius: 9999px;
-        background: rgba(16, 185, 129, 0.14);
+        background: rgba(16, 185, 129, 0.1);
         border: 1px solid rgba(52, 211, 153, 0.35);
         color: var(--rc-mint);
-        font-size: 0.85rem;
+        font-size: 0.84rem;
         font-weight: 600;
-        margin-bottom: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
       }
-      .hero-title {
-        font-size: 3.25rem;
+
+      .status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #10B981;
+        box-shadow: 0 0 8px #10B981;
+        display: inline-block;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.4; transform: scale(0.85); }
+      }
+
+      .hero-h1 {
+        font-size: 3.75rem;
         font-weight: 800;
-        line-height: 1.15;
-        letter-spacing: -0.03em;
+        line-height: 1.12;
+        letter-spacing: -0.035em;
         margin: 0 auto 1.5rem auto;
-        max-width: 900px;
-        color: #fff;
+        max-width: 960px;
+        color: #FFFFFF;
       }
-      .hero-subtitle {
-        font-size: 1.2rem;
+
+      .hero-gradient-text {
+        background: linear-gradient(135deg, #FFFFFF 30%, #34D399 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .hero-p {
+        font-size: 1.22rem;
         color: var(--rc-text-muted);
-        max-width: 750px;
+        max-width: 780px;
         margin: 0 auto 2.5rem auto;
-        line-height: 1.6;
+        line-height: 1.65;
       }
-      .hero-actions {
+
+      .hero-p strong {
+        color: #E2E8F0;
+      }
+
+      .hero-buttons {
         display: flex;
         justify-content: center;
+        align-items: center;
         gap: 1rem;
-        margin-bottom: 3.5rem;
+        margin-bottom: 2.25rem;
         flex-wrap: wrap;
       }
-      /* Section Headings */
-      .section-header {
-        text-align: center;
-        margin: 5rem 0 2.5rem 0;
+
+      .btn-cta-primary {
+        background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+        color: #FFFFFF;
+        padding: 13px 28px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 1rem;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        box-shadow: 0 4px 25px rgba(16, 185, 129, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       }
-      .section-tag {
-        font-family: monospace;
+
+      .btn-cta-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(16, 185, 129, 0.55);
+      }
+
+      .btn-cta-secondary {
+        background: rgba(30, 41, 59, 0.55);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        color: #F8FAFC;
+        padding: 13px 26px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 1rem;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid var(--rc-border);
+        transition: all 0.2s ease;
+      }
+
+      .btn-cta-secondary:hover {
+        background: rgba(51, 65, 85, 0.8);
+        border-color: rgba(52, 211, 153, 0.4);
+        transform: translateY(-1px);
+      }
+
+      /* Command Line Copy Box */
+      .cli-box {
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        background: #0B1019;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 9px 16px;
+        font-family: var(--rc-font-mono);
+        font-size: 0.88rem;
+        color: #CBD5E1;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        margin-bottom: 2.5rem;
+        max-width: 520px;
+        width: 100%;
+      }
+
+      .cli-prompt {
+        color: var(--rc-mint);
+        user-select: none;
+      }
+
+      .cli-code {
+        color: #E2E8F0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .btn-cli-copy {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 6px;
+        padding: 5px 10px;
+        color: var(--rc-mint);
+        cursor: pointer;
+        font-size: 0.78rem;
+        font-family: var(--rc-font-mono);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.15s ease;
+        flex-shrink: 0;
+      }
+
+      .btn-cli-copy:hover {
+        background: rgba(16, 185, 129, 0.2);
+        border-color: rgba(52, 211, 153, 0.4);
+      }
+
+      /* Feature Trust Pills Row */
+      .trust-pills {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-bottom: 3.5rem;
+      }
+
+      .trust-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 12px;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--rc-border);
+        color: var(--rc-text-muted);
         font-size: 0.82rem;
+        font-weight: 500;
+      }
+
+      .trust-pill svg {
+        color: var(--rc-mint);
+      }
+
+      /* --- Realistic VS Code Mockup Window --- */
+      .editor-frame {
+        background: #0C111C;
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), 0 0 35px rgba(16, 185, 129, 0.12);
+        margin: 0 auto;
+        text-align: left;
+        font-family: var(--rc-font-mono);
+        font-size: 0.88rem;
+      }
+
+      .editor-titlebar {
+        background: #111827;
+        padding: 10px 16px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .editor-dots {
+        display: flex;
+        gap: 7px;
+      }
+
+      .editor-dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+
+      .dot-red { background: #EF4444; }
+      .dot-yellow { background: #F59E0B; }
+      .dot-green { background: #10B981; }
+
+      .editor-window-title {
+        color: #94A3B8;
+        font-size: 0.8rem;
+        margin: 0 auto;
+        font-weight: 500;
+      }
+
+      .editor-tabs {
+        background: #0A0E17;
+        display: flex;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        overflow-x: auto;
+      }
+
+      .editor-tab {
+        padding: 8px 18px;
+        font-size: 0.8rem;
+        color: #64748B;
+        border-right: 1px solid rgba(255, 255, 255, 0.06);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        user-select: none;
+      }
+
+      .editor-tab.active {
+        background: #0C111C;
+        color: #F8FAFC;
+        border-top: 2px solid var(--rc-emerald);
+      }
+
+      .editor-breadcrumbs {
+        padding: 6px 16px;
+        background: rgba(255, 255, 255, 0.015);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        color: #64748B;
+        font-size: 0.76rem;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .editor-content-grid {
+        display: grid;
+        grid-template-columns: 50px 1fr;
+        padding: 1.25rem 0;
+      }
+
+      .editor-gutter {
+        color: #475569;
+        text-align: right;
+        padding-right: 14px;
+        user-select: none;
+        font-size: 0.82rem;
+        line-height: 1.68;
+        border-right: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .editor-code-body {
+        padding-left: 16px;
+        padding-right: 16px;
+        line-height: 1.68;
+        overflow-x: auto;
+      }
+
+      /* CodeLens Floating Rows */
+      .codelens-bar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 6px;
+        font-size: 0.78rem;
+      }
+
+      .codelens-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: rgba(16, 185, 129, 0.12);
+        border: 1px solid rgba(16, 185, 129, 0.35);
+        color: var(--rc-mint);
+        padding: 2px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.15s ease;
+      }
+
+      .codelens-btn:hover {
+        background: rgba(16, 185, 129, 0.25);
+        border-color: rgba(52, 211, 153, 0.6);
+      }
+
+      .pill-pass {
+        background: rgba(16, 185, 129, 0.18);
+        border: 1px solid rgba(16, 185, 129, 0.45);
+        color: #34D399;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-weight: 600;
+      }
+
+      .pill-capture {
+        background: rgba(245, 158, 11, 0.15);
+        border: 1px solid rgba(245, 158, 11, 0.35);
+        color: #FBBF24;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-weight: 500;
+      }
+
+      .editor-statusbar {
+        background: #090D15;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 6px 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.74rem;
+        color: #94A3B8;
+      }
+
+      .statusbar-left, .statusbar-right {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .statusbar-badge-ok {
+        color: var(--rc-mint);
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-weight: 600;
+      }
+
+      /* Syntax highlighting tokens */
+      .syn-k { color: #34D399; }
+      .syn-s { color: #A7F3D0; }
+      .syn-m { color: #F59E0B; font-weight: 600; }
+      .syn-v { color: #FCD34D; }
+      .syn-n { color: #6EE7B7; }
+
+      /* --- Section Headers --- */
+      .section-heading-wrap {
+        text-align: center;
+        margin: 6.5rem 0 3rem 0;
+      }
+
+      .section-tag {
+        font-family: var(--rc-font-mono);
+        font-size: 0.8rem;
         color: var(--rc-emerald);
         text-transform: uppercase;
-        letter-spacing: 0.1em;
+        letter-spacing: 0.12em;
         font-weight: 700;
+        margin-bottom: 0.5rem;
       }
+
       .section-title {
-        font-size: 2.2rem;
-        font-weight: 700;
-        margin: 0.5rem 0 1rem 0;
-        letter-spacing: -0.02em;
-        color: #fff;
+        font-size: 2.4rem;
+        font-weight: 800;
+        letter-spacing: -0.025em;
+        color: #FFFFFF;
+        margin: 0 0 1rem 0;
       }
+
       .section-desc {
         color: var(--rc-text-muted);
-        max-width: 650px;
+        font-size: 1.1rem;
+        max-width: 680px;
         margin: 0 auto;
-        font-size: 1.05rem;
+        line-height: 1.6;
       }
-      /* Author Card */
-      .author-card {
-        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(17, 23, 35, 0.95) 100%);
+
+      /* --- Bento Grid Core Capabilities --- */
+      .bento-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .bento-card {
+        background: var(--rc-card);
+        border: 1px solid var(--rc-border);
+        border-radius: 14px;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .bento-card:hover {
+        background: var(--rc-card-hover);
+        border-color: rgba(16, 185, 129, 0.4);
+        transform: translateY(-4px);
+        box-shadow: 0 14px 35px rgba(0, 0, 0, 0.4), 0 0 25px rgba(16, 185, 129, 0.1);
+      }
+
+      .bento-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: rgba(16, 185, 129, 0.12);
         border: 1px solid rgba(16, 185, 129, 0.3);
+        color: var(--rc-mint);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .bento-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #FFFFFF;
+        margin: 0 0 0.75rem 0;
+        letter-spacing: -0.01em;
+      }
+
+      .bento-desc {
+        color: var(--rc-text-muted);
+        font-size: 0.94rem;
+        line-height: 1.6;
+        margin: 0 0 1.5rem 0;
+        flex-grow: 1;
+      }
+
+      .bento-preview-tag {
+        font-family: var(--rc-font-mono);
+        font-size: 0.78rem;
+        background: #090E17;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 8px;
+        padding: 8px 12px;
+        color: var(--rc-mint);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      /* --- Interactive Real-World Code Showcase Tabs --- */
+      .showcase-wrapper {
+        background: #0C111C;
+        border: 1px solid var(--rc-border);
+        border-radius: 14px;
+        overflow: hidden;
+        margin-top: 2rem;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      }
+
+      .showcase-tabs-nav {
+        display: flex;
+        background: #090D15;
+        border-bottom: 1px solid var(--rc-border);
+        overflow-x: auto;
+      }
+
+      .showcase-tab-btn {
+        padding: 14px 22px;
+        background: transparent;
+        border: none;
+        color: #64748B;
+        font-size: 0.92rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border-bottom: 2px solid transparent;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+      }
+
+      .showcase-tab-btn:hover {
+        color: #CBD5E1;
+      }
+
+      .showcase-tab-btn.active {
+        color: #FFFFFF;
+        border-bottom-color: var(--rc-emerald);
+        background: rgba(16, 185, 129, 0.05);
+      }
+
+      .showcase-panel {
+        display: none;
+        padding: 1.75rem;
+      }
+
+      .showcase-panel.active {
+        display: block;
+      }
+
+      .showcase-panel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+
+      .showcase-panel-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #FFFFFF;
+        margin: 0;
+      }
+
+      .showcase-code {
+        margin: 0;
+        padding: 1.25rem;
+        background: #070A0F;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        font-family: var(--rc-font-mono);
+        font-size: 0.86rem;
+        color: #E2E8F0;
+        overflow-x: auto;
+        line-height: 1.6;
+      }
+
+      /* --- 4-Step Engineering Pipeline --- */
+      .pipeline-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.25rem;
+        margin-top: 2rem;
+      }
+
+      .pipeline-card {
+        background: var(--rc-card);
+        border: 1px solid var(--rc-border);
+        border-radius: 14px;
+        padding: 1.75rem 1.4rem;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.25s ease;
+      }
+
+      .pipeline-card:hover {
+        border-color: var(--rc-emerald);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(16, 185, 129, 0.12);
+      }
+
+      .pipeline-card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.25rem;
+      }
+
+      .pipeline-step-badge {
+        font-family: var(--rc-font-mono);
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--rc-mint);
+        background: rgba(16, 185, 129, 0.12);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        padding: 3px 10px;
+        border-radius: 9999px;
+      }
+
+      .pipeline-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--rc-mint);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .pipeline-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #FFFFFF;
+        margin: 0 0 0.5rem 0;
+      }
+
+      .pipeline-desc {
+        color: var(--rc-text-muted);
+        font-size: 0.88rem;
+        line-height: 1.55;
+        margin: 0 0 1.25rem 0;
+        flex-grow: 1;
+      }
+
+      .pipeline-code-pill {
+        background: #070A0F;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 6px;
+        padding: 8px 12px;
+        font-family: var(--rc-font-mono);
+        font-size: 0.78rem;
+        color: #E2E8F0;
+      }
+
+      /* --- Comparison Matrix --- */
+      .matrix-table-wrap {
+        overflow-x: auto;
+        border-radius: 14px;
+        border: 1px solid var(--rc-border);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+        margin-top: 2rem;
+      }
+
+      .matrix-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.92rem;
+      }
+
+      .matrix-table th {
+        background: #0E1420;
+        color: #FFFFFF;
+        padding: 16px 20px;
+        font-weight: 700;
+        text-align: left;
+        border-bottom: 2px solid var(--rc-border);
+      }
+
+      .matrix-table th.col-rc {
+        background: rgba(16, 185, 129, 0.12);
+        color: var(--rc-mint);
+        border-left: 1px solid rgba(16, 185, 129, 0.35);
+        border-right: 1px solid rgba(16, 185, 129, 0.35);
+      }
+
+      .matrix-table td {
+        padding: 14px 20px;
+        border-bottom: 1px solid var(--rc-border);
+        color: #CBD5E1;
+      }
+
+      .matrix-table td.col-rc {
+        background: rgba(16, 185, 129, 0.04);
+        border-left: 1px solid rgba(16, 185, 129, 0.25);
+        border-right: 1px solid rgba(16, 185, 129, 0.25);
+        font-weight: 600;
+        color: #FFFFFF;
+      }
+
+      .matrix-table tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .matrix-table tr:hover td.col-rc {
+        background: rgba(16, 185, 129, 0.08);
+      }
+
+      .matrix-pill-tag {
+        font-family: var(--rc-font-mono);
+        font-size: 0.76rem;
+        padding: 2px 6px;
+        border-radius: 4px;
+        background: rgba(16, 185, 129, 0.15);
+        color: var(--rc-mint);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        margin-left: 6px;
+      }
+
+      /* --- FAQ Accordion --- */
+      .faq-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        max-width: 900px;
+        margin: 2rem auto 0 auto;
+      }
+
+      .faq-card {
+        background: var(--rc-card);
+        border: 1px solid var(--rc-border);
+        border-radius: 12px;
+        overflow: hidden;
+        transition: all 0.2s ease;
+      }
+
+      .faq-card:hover {
+        border-color: rgba(16, 185, 129, 0.4);
+      }
+
+      .faq-card[open] {
+        border-color: var(--rc-emerald);
+        box-shadow: 0 8px 25px rgba(16, 185, 129, 0.1);
+      }
+
+      .faq-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.25rem 1.5rem;
+        cursor: pointer;
+        user-select: none;
+        list-style: none;
+      }
+
+      .faq-header::-webkit-details-marker {
+        display: none;
+      }
+
+      .faq-q-text {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: #FFFFFF;
+        flex-grow: 1;
+      }
+
+      .faq-tag {
+        font-family: var(--rc-font-mono);
+        font-size: 0.74rem;
+        font-weight: 600;
+        padding: 3px 8px;
+        border-radius: 4px;
+        background: rgba(16, 185, 129, 0.12);
+        color: var(--rc-mint);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        white-space: nowrap;
+      }
+
+      .faq-arrow {
+        color: #94A3B8;
+        transition: transform 0.25s ease, color 0.2s ease;
+      }
+
+      .faq-card[open] .faq-arrow {
+        transform: rotate(180deg);
+        color: var(--rc-mint);
+      }
+
+      .faq-body {
+        padding: 0 1.5rem 1.4rem 1.5rem;
+        color: var(--rc-text-muted);
+        font-size: 0.95rem;
+        line-height: 1.68;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding-top: 1.1rem;
+      }
+
+      .faq-body code {
+        font-family: var(--rc-font-mono);
+        background: rgba(16, 185, 129, 0.12);
+        color: var(--rc-mint);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.88em;
+      }
+
+      /* --- Creator & Author Spotlight --- */
+      .author-spotlight {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(13, 19, 31, 0.95) 100%);
+        border: 1px solid rgba(16, 185, 129, 0.35);
         border-radius: 16px;
-        padding: 2.5rem;
-        margin: 4rem 0;
+        padding: 2.75rem;
+        margin: 5rem 0 3rem 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
         flex-wrap: wrap;
         gap: 2rem;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(16, 185, 129, 0.1);
       }
-      .author-info h3 {
+
+      .author-left h3 {
         margin: 0 0 0.5rem 0;
-        font-size: 1.5rem;
-        color: #fff;
+        font-size: 1.6rem;
+        color: #FFFFFF;
+        letter-spacing: -0.02em;
       }
-      .author-info p {
-        margin: 0 0 1rem 0;
-        color: var(--rc-text-muted);
-        max-width: 600px;
+
+      .author-left p {
+        margin: 0 0 1.5rem 0;
+        color: #CBD5E1;
+        max-width: 620px;
+        font-size: 1.02rem;
+        line-height: 1.6;
       }
-      .author-links {
+
+      .author-btns {
         display: flex;
         gap: 1rem;
         flex-wrap: wrap;
       }
-      /* Footer */
+
+      .btn-author-gh {
+        background: #1E293B;
+        color: #F8FAFC;
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.2s ease;
+      }
+
+      .btn-author-gh:hover {
+        background: #334155;
+        border-color: rgba(52, 211, 153, 0.4);
+      }
+
+      .btn-author-li {
+        background: rgba(16, 185, 129, 0.12);
+        color: var(--rc-mint);
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid rgba(16, 185, 129, 0.35);
+        transition: all 0.2s ease;
+      }
+
+      .btn-author-li:hover {
+        background: rgba(16, 185, 129, 0.22);
+      }
+
+      .author-terminal {
+        background: #070A0F;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 1.25rem 1.5rem;
+        font-family: var(--rc-font-mono);
+        font-size: 0.84rem;
+        color: var(--rc-mint);
+        line-height: 1.7;
+      }
+
+      /* --- CTA Pre-Footer Banner --- */
+      .cta-banner {
+        text-align: center;
+        padding: 4.5rem 2rem;
+        background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.16) 0%, rgba(13, 19, 31, 0.9) 70%);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        border-radius: 18px;
+        margin: 4rem 0 5rem 0;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      }
+
+      .cta-banner h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        letter-spacing: -0.025em;
+        color: #FFFFFF;
+        margin: 0 0 1rem 0;
+      }
+
+      .cta-banner p {
+        color: #CBD5E1;
+        font-size: 1.15rem;
+        max-width: 650px;
+        margin: 0 auto 2.25rem auto;
+        line-height: 1.6;
+      }
+
+      /* --- Footer --- */
       footer {
         border-top: 1px solid var(--rc-border);
-        padding: 4rem 0 2rem 0;
-        margin-top: 5rem;
-        background: #080B11;
+        padding: 4.5rem 0 2.5rem 0;
+        background: #05080E;
       }
+
       .footer-grid {
         display: grid;
-        grid-template-columns: 2fr 1fr 1fr 1fr;
+        grid-template-columns: 2fr 1fr 1fr 1.2fr;
         gap: 3rem;
-        margin-bottom: 3rem;
+        margin-bottom: 3.5rem;
       }
-      @media (max-width: 768px) {
-        .footer-grid {
-          grid-template-columns: 1fr;
-          gap: 2rem;
-        }
-        .hero-title {
-          font-size: 2.2rem;
-        }
+
+      .footer-brand p {
+        color: var(--rc-text-muted);
+        font-size: 0.92rem;
+        line-height: 1.65;
+        max-width: 360px;
+        margin-top: 0.75rem;
       }
+
       .footer-col h4 {
-        color: #fff;
-        margin: 0 0 1rem 0;
-        font-size: 0.95rem;
-        font-weight: 600;
+        color: #FFFFFF;
+        margin: 0 0 1.25rem 0;
+        font-size: 0.92rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
       }
+
       .footer-col ul {
         list-style: none;
         padding: 0;
         margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
       }
-      .footer-col li {
-        margin-bottom: 0.6rem;
-      }
+
       .footer-col a {
         color: var(--rc-text-muted);
         text-decoration: none;
         font-size: 0.9rem;
-        transition: color 0.2s;
+        transition: color 0.15s ease;
       }
+
       .footer-col a:hover {
-        color: #fff;
+        color: var(--rc-mint);
       }
+
       .footer-bottom {
         border-top: 1px solid var(--rc-border);
         padding-top: 2rem;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         color: var(--rc-text-muted);
         font-size: 0.85rem;
         flex-wrap: wrap;
         gap: 1rem;
       }
+
+      /* --- Responsive Breakpoints --- */
+      @media (max-width: 1024px) {
+        .bento-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .pipeline-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .footer-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero-h1 {
+          font-size: 2.5rem;
+        }
+        .hero-p {
+          font-size: 1.05rem;
+        }
+        .bento-grid {
+          grid-template-columns: 1fr;
+        }
+        .pipeline-grid {
+          grid-template-columns: 1fr;
+        }
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+        .nav-links {
+          display: none;
+        }
+        .mobile-menu-btn {
+          display: block;
+        }
+        .author-spotlight {
+          padding: 1.75rem;
+        }
+        .cta-banner {
+          padding: 3rem 1.5rem;
+        }
+        .cta-banner h2 {
+          font-size: 2rem;
+        }
+      }
     </style>
   </head>
   <body>
-    <!-- Top Navigation -->
+    <!-- Background textures and ambient light -->
+    <div class="bg-grid-pattern"></div>
+    <div class="spotlight-top"></div>
+    <div class="spotlight-middle"></div>
+
+    <!-- Top Sticky Navigation -->
     <header>
       <div class="container nav-inner">
-        <a href="/" class="logo-link">
-          <img src="/logo.png" alt="RouteCase Logo" class="logo-img" />
+        <a href="/" class="logo-brand">
+          <div class="logo-icon-wrap">
+            <img src="/logo.png" alt="RouteCase Logo" width="36" height="36" />
+          </div>
           <span>RouteCase</span>
+          <span class="logo-version-tag">v0.2.0</span>
         </a>
+
         <nav class="nav-links">
-          <a href="/introduction/">Documentation</a>
-          <a href="/tutorials/express-api/">Tutorials</a>
-          <a href="/reference/schema-specification/">Schema</a>
-          <a href="/faq/">FAQ</a>
-          <a href="https://github.com/UTKARSHKUMAR712/routecase" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://www.linkedin.com/in/utkarsh-kumar-8344b1337" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://marketplace.visualstudio.com/items?itemName=UtkarshKumar.routecase" target="_blank" class="btn-primary">
-            Install Extension Free
+          <a href="/introduction/" class="nav-link">Documentation</a>
+          <a href="/tutorials/express-api/" class="nav-link">Tutorials</a>
+          <a href="/reference/schema-specification/" class="nav-link">Schema</a>
+          <a href="/faq/" class="nav-link">FAQ</a>
+          <a href="https://github.com/UTKARSHKUMAR712/routecase" target="_blank" rel="noopener" class="nav-link" style="display: flex; align-items: center; gap: 6px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
           </a>
         </nav>
+
+        <div class="nav-actions">
+          <a href="https://marketplace.visualstudio.com/items?itemName=UtkarshKumar.routecase" target="_blank" rel="noopener" class="btn-install-nav">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path></svg>
+            <span>Install Extension</span>
+          </a>
+          <button id="mobileMenuToggle" class="mobile-menu-btn" aria-label="Toggle navigation menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Drawer -->
+      <div id="mobileDrawer" class="mobile-drawer">
+        <a href="/introduction/" class="nav-link">Documentation</a>
+        <a href="/tutorials/express-api/" class="nav-link">Tutorials</a>
+        <a href="/reference/schema-specification/" class="nav-link">Schema Reference</a>
+        <a href="/faq/" class="nav-link">FAQ</a>
+        <a href="https://github.com/UTKARSHKUMAR712/routecase" target="_blank" rel="noopener" class="nav-link">GitHub Repository</a>
+        <a href="https://www.linkedin.com/in/utkarsh-kumar-8344b1337" target="_blank" rel="noopener" class="nav-link">LinkedIn Creator Profile</a>
       </div>
     </header>
 
-    <!-- Hero Section -->
     <main class="container">
-      <section class="hero-section">
-        <div class="hero-badge">
-          <span>⚡ v0.2.0 • VS Code Marketplace Release</span>
+      <!-- Hero Section -->
+      <section class="hero-wrap">
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          <span>Live on VS Code Marketplace • v0.2.0 • 100% Offline</span>
         </div>
-        <h1 class="hero-title">
-          Define API Routes Once.<br />Test Multiple Cases Directly in VS Code.
+
+        <h1 class="hero-h1">
+          Define API Routes Once.<br />
+          <span class="hero-gradient-text">Test Directly in VS Code.</span>
         </h1>
-        <p class="hero-subtitle">
-          Created by <strong>Utkarsh Kumar (<a href="https://github.com/UTKARSHKUMAR712" style="color: var(--rc-mint); text-decoration: none;">utkarshkumar712</a>)</strong>. 
-          The lightweight, declarative API test runner built into your editor with Jupyter-style CodeLens triggers, scriptless variable chaining, and 100% offline privacy.
+
+        <p class="hero-p">
+          Engineered by <strong>Utkarsh Kumar (<a href="https://github.com/UTKARSHKUMAR712" target="_blank" rel="noopener" style="color: var(--rc-mint); text-decoration: none;">utkarshkumar712</a>)</strong>. 
+          The lightweight, declarative API test runner built directly into your editor with Jupyter-style CodeLens triggers, zero-script variable chaining, and 100% offline privacy.
         </p>
-        <div class="hero-actions">
-          <a href="https://marketplace.visualstudio.com/items?itemName=UtkarshKumar.routecase" target="_blank" class="btn-primary" style="padding: 12px 24px; font-size: 1rem;">
+
+        <div class="hero-buttons">
+          <a href="https://marketplace.visualstudio.com/items?itemName=UtkarshKumar.routecase" target="_blank" rel="noopener" class="btn-cta-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
             Install for VS Code Free
           </a>
-          <a href="/introduction/" class="btn-secondary" style="padding: 12px 24px; font-size: 1rem;">
-            Read Full Documentation →
+          <a href="/introduction/" class="btn-cta-secondary">
+            Explore Documentation
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
         </div>
 
-        <!-- Interactive Terminal Mockup -->
-        <div class="rc-mockup-window">
-          <div class="rc-mockup-titlebar">
-            <div class="rc-mockup-dots">
-              <span class="rc-dot-red"></span>
-              <span class="rc-dot-yellow"></span>
-              <span class="rc-dot-green"></span>
-            </div>
-            <span class="rc-mockup-filename">api-suite.rcase — VS Code</span>
+        <!-- Terminal Install Snippet with Copy Feedback -->
+        <div>
+          <div class="cli-box">
+            <span class="cli-prompt">$</span>
+            <span class="cli-code" id="cliCommand">code --install-extension UtkarshKumar.routecase</span>
+            <button class="btn-cli-copy" id="cliCopyBtn" title="Copy to clipboard">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span id="cliCopyText">Copy</span>
+            </button>
           </div>
-          <div class="rc-mockup-body" style="text-align: left;">
-            <div class="codelens-row">
-              <span class="codelens-action">▶ Run Entire Suite (2 routes • 4 cases)</span>
-              <span class="badge-pass">✓ ALL PASS (57ms)</span>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="trust-pills">
+          <span class="trust-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            100% Offline &amp; Private
+          </span>
+          <span class="trust-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            Zero Background Daemons
+          </span>
+          <span class="trust-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>
+            Git-Committed .rcase Files
+          </span>
+          <span class="trust-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+            Native OpenAPI 3.x Import
+          </span>
+          <span class="trust-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            Automatic Secret Redaction
+          </span>
+        </div>
+
+        <!-- Realistic In-Editor VS Code Mockup Window -->
+        <div class="editor-frame">
+          <div class="editor-titlebar">
+            <div class="editor-dots">
+              <span class="editor-dot dot-red"></span>
+              <span class="editor-dot dot-yellow"></span>
+              <span class="editor-dot dot-green"></span>
             </div>
-            <pre style="margin: 0; background: transparent; padding: 0;"><code>&#123;
-  <span style="color:#34D399">"baseUrl"</span>: <span style="color:#6EE7B7">"https://api.internal.dev"</span>,
-  <span style="color:#34D399">"tests"</span>: [</code></pre>
-            <div class="codelens-row" style="margin-left: 1.5rem; margin-top: 0.5rem;">
-              <span class="codelens-action">▶ Run Endpoint (POST /auth/login)</span>
-              <span class="badge-pass">✓ PASS (200 • 38ms)</span>
-              <span class="badge-captured">📋 Captured: authToken, authUserId</span>
+            <div class="editor-window-title">api-suite.rcase — RouteCase Workspace</div>
+          </div>
+
+          <div class="editor-tabs">
+            <div class="editor-tab active">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="18" r="3"></circle><line x1="6" y1="9" x2="6" y2="18"></line><line x1="6" y1="18" x2="15" y2="18"></line></svg>
+              <span>api-suite.rcase</span>
             </div>
-            <pre style="margin: 0 0 0 1.5rem; background: transparent; padding: 0;"><code>    &#123;
-      <span style="color:#34D399">"name"</span>: <span style="color:#F8FAFC">"Authenticate User"</span>,
-      <span style="color:#34D399">"method"</span>: <span style="color:#F59E0B">"POST"</span>,
-      <span style="color:#34D399">"path"</span>: <span style="color:#6EE7B7">"/auth/login"</span>,
-      <span style="color:#34D399">"success"</span>: [&#123;
-        <span style="color:#34D399">"name"</span>: <span style="color:#F8FAFC">"Valid credentials capture token"</span>,
-        <span style="color:#34D399">"body"</span>: &#123; <span style="color:#34D399">"username"</span>: <span style="color:#6EE7B7">"dev_&#123;&#123;$randomInt&#125;&#125;"</span>, <span style="color:#34D399">"password"</span>: <span style="color:#6EE7B7">"secret"</span> &#125;,
-        <span style="color:#F59E0B">"capture"</span>: &#123; <span style="color:#34D399">"authToken"</span>: <span style="color:#6EE7B7">"accessToken"</span>, <span style="color:#34D399">"authUserId"</span>: <span style="color:#6EE7B7">"userId"</span> &#125;,
-        <span style="color:#34D399">"expect"</span>: &#123; <span style="color:#34D399">"status"</span>: <span style="color:#F59E0B">200</span> &#125;
+            <div class="editor-tab">
+              <span>users.rcase</span>
+            </div>
+            <div class="editor-tab">
+              <span>.rcase.env</span>
+            </div>
+          </div>
+
+          <div class="editor-breadcrumbs">
+            <span>src</span>
+            <span>›</span>
+            <span>tests</span>
+            <span>›</span>
+            <span>api-suite.rcase</span>
+            <span>›</span>
+            <span style="color: #94A3B8;">"Authenticate User"</span>
+            <span>›</span>
+            <span style="color: var(--rc-amber);">POST /auth/login</span>
+          </div>
+
+          <div class="editor-content-grid">
+            <div class="editor-gutter">
+              01<br />02<br />03<br />04<br />05<br />06<br />07<br />08<br />09<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24
+            </div>
+
+            <div class="editor-code-body">
+              <div class="codelens-bar">
+                <span class="codelens-btn">▶ Run Entire Suite (2 routes • 4 cases)</span>
+                <span class="pill-pass">✓ ALL PASS (57ms)</span>
+              </div>
+              <div>&#123;</div>
+              <div style="padding-left: 1.25rem;">
+                <span class="syn-k">"baseUrl"</span>: <span class="syn-s">"https://api.internal.dev"</span>,
+              </div>
+              <div style="padding-left: 1.25rem;">
+                <span class="syn-k">"tests"</span>: [
+              </div>
+
+              <!-- Endpoint 1 -->
+              <div style="padding-left: 2rem; margin-top: 0.35rem;">
+                <div class="codelens-bar">
+                  <span class="codelens-btn">▶ Run Endpoint (POST /auth/login)</span>
+                  <span class="pill-pass">✓ PASS (200 • 38ms)</span>
+                  <span class="pill-capture">📋 Captured: authToken, authUserId</span>
+                </div>
+                <div>&#123;</div>
+                <div style="padding-left: 1.25rem;">
+                  <span class="syn-k">"name"</span>: <span class="syn-s">"Authenticate User"</span>,
+                </div>
+                <div style="padding-left: 1.25rem;">
+                  <span class="syn-k">"method"</span>: <span class="syn-m">"POST"</span>,
+                </div>
+                <div style="padding-left: 1.25rem;">
+                  <span class="syn-k">"path"</span>: <span class="syn-s">"/auth/login"</span>,
+                </div>
+                <div style="padding-left: 1.25rem;">
+                  <span class="syn-k">"success"</span>: [&#123;
+                </div>
+                <div style="padding-left: 2.5rem;">
+                  <span class="syn-k">"name"</span>: <span class="syn-s">"Valid credentials capture token"</span>,
+                </div>
+                <div style="padding-left: 2.5rem;">
+                  <span class="syn-k">"body"</span>: &#123; <span class="syn-k">"user"</span>: <span class="syn-s">"dev_&#123;&#123;$randomInt&#125;&#125;"</span>, <span class="syn-k">"secret"</span>: <span class="syn-s">"&#123;&#123;APP_KEY&#125;&#125;"</span> &#125;,
+                </div>
+                <div style="padding-left: 2.5rem;">
+                  <span class="syn-m">"capture"</span>: &#123; <span class="syn-k">"authToken"</span>: <span class="syn-s">"accessToken"</span>, <span class="syn-k">"authUserId"</span>: <span class="syn-s">"user.id"</span> &#125;,
+                </div>
+                <div style="padding-left: 2.5rem;">
+                  <span class="syn-k">"expect"</span>: &#123; <span class="syn-k">"status"</span>: <span class="syn-n">200</span> &#125;
+                </div>
+                <div style="padding-left: 1.25rem;">&#125;]</div>
+                <div>&#125;,</div>
+              </div>
+
+              <!-- Endpoint 2 -->
+              <div style="padding-left: 2rem; margin-top: 0.35rem;">
+                <div class="codelens-bar">
+                  <span class="codelens-btn">▶ Run Endpoint (GET /users/&#123;id&#125;)</span>
+                  <span class="pill-pass">✓ PASS (200 • 19ms)</span>
+                </div>
+                <div>&#123;</div>
+                <div style="padding-left: 1.25rem;">
+                  <span class="syn-k">"name"</span>: <span class="syn-s">"Get User Profile"</span>,
+                </div>
+                <div style="padding-left: 1.25rem;">
+                  <span class="syn-k">"method"</span>: <span class="syn-k">"GET"</span>,
+                </div>
+                <div style="padding-left: 1.25rem;">
+                  <span class="syn-k">"path"</span>: <span class="syn-s">"/users/&#123;id&#125;"</span>,
+                </div>
+                <div style="padding-left: 1.25rem;">
+                  <span class="syn-k">"headers"</span>: &#123; <span class="syn-k">"Authorization"</span>: <span class="syn-v">"Bearer &#123;&#123;authToken&#125;&#125;"</span> &#125;,
+                </div>
+                <div style="padding-left: 1.25rem;">
+                  <span class="syn-k">"success"</span>: [&#123;
+                </div>
+                <div style="padding-left: 2.5rem;">
+                  <span class="syn-k">"params"</span>: &#123; <span class="syn-k">"id"</span>: <span class="syn-v">"&#123;&#123;authUserId&#125;&#125;"</span> &#125;,
+                </div>
+                <div style="padding-left: 2.5rem;">
+                  <span class="syn-k">"expect"</span>: &#123; <span class="syn-k">"status"</span>: <span class="syn-n">200</span>, <span class="syn-k">"maxDurationMs"</span>: <span class="syn-n">250</span> &#125;
+                </div>
+                <div style="padding-left: 1.25rem;">&#125;]</div>
+                <div>&#125;</div>
+              </div>
+
+              <div style="padding-left: 1.25rem;">]</div>
+              <div>&#125;</div>
+            </div>
+          </div>
+
+          <div class="editor-statusbar">
+            <div class="statusbar-left">
+              <span class="statusbar-badge-ok">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                RouteCase: 2/2 Passed (57ms)
+              </span>
+              <span>Ln 14, Col 22</span>
+              <span>Spaces: 2</span>
+            </div>
+            <div class="statusbar-right">
+              <span>UTF-8</span>
+              <span>JSON (.rcase)</span>
+              <span>RouteCase v0.2.0</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bento Grid Core Capabilities -->
+      <section>
+        <div class="section-heading-wrap">
+          <div class="section-tag">ENGINEERING FOUNDATIONS</div>
+          <h2 class="section-title">Built for Serious Backend Engineers</h2>
+          <p class="section-desc">Everything required to test, chain, and document REST endpoints inside your workspace without context switching.</p>
+        </div>
+
+        <div class="bento-grid">
+          <!-- Card 1 -->
+          <div class="bento-card">
+            <div class="bento-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+            </div>
+            <h3 class="bento-title">Declarative .rcase Schema</h3>
+            <p class="bento-desc">
+              Define endpoint paths, methods, and base URLs once. Nest unlimited success and failure scenarios cleanly without maintaining sprawling test scripts.
+            </p>
+            <div class="bento-preview-tag">
+              <span>Syntax: .rcase JSON</span>
+              <span>100% Git-Tracked</span>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bento-card">
+            <div class="bento-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+            <h3 class="bento-title">Jupyter-Style Inline CodeLens</h3>
+            <p class="bento-desc">
+              Floating action triggers render right above endpoints. Execute entire suites, specific routes, or individual cases with one click from your code.
+            </p>
+            <div class="bento-preview-tag">
+              <span>Zero Context Switching</span>
+              <span>⚡ &lt; 20ms Overhead</span>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="bento-card">
+            <div class="bento-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+            </div>
+            <h3 class="bento-title">Scriptless Variable Chaining</h3>
+            <p class="bento-desc">
+              Extract tokens, user IDs, and transaction references with <code>capture</code> dot notation. Cascades automatically into downstream headers and path params.
+            </p>
+            <div class="bento-preview-tag">
+              <span>No JS Boilerplate</span>
+              <span>Memory Scoped</span>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="bento-card">
+            <div class="bento-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><circle cx="15.5" cy="15.5" r="1.5"></circle></svg>
+            </div>
+            <h3 class="bento-title">Dynamic Mock Generators</h3>
+            <p class="bento-desc">
+              Prevent duplicate primary key collisions. Inject live <code>&#123;&#123;$uuid&#125;&#125;</code>, <code>&#123;&#123;$timestamp&#125;&#125;</code>, and <code>&#123;&#123;$randomInt&#125;&#125;</code> placeholders into payloads and headers on every run.
+            </p>
+            <div class="bento-preview-tag">
+              <span>Built-in Randomizers</span>
+              <span>Unique Per Run</span>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="bento-card">
+            <div class="bento-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+            </div>
+            <h3 class="bento-title">Native OpenAPI 3.x Importer</h3>
+            <p class="bento-desc">
+              Import OpenAPI 3.0 / Swagger 2.0 specifications with zero external dependencies. Automatically generates endpoints, methods, path parameters, and request schemas.
+            </p>
+            <div class="bento-preview-tag">
+              <span>Command Palette</span>
+              <span>One-Click Convert</span>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="bento-card">
+            <div class="bento-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </div>
+            <h3 class="bento-title">Automatic Secret Redaction</h3>
+            <p class="bento-desc">
+              Zero telemetry. Your tokens and credentials stay 100% on your local machine. Authorization headers, API keys, and cookie tokens are masked with <code>[REDACTED]</code> in logs.
+            </p>
+            <div class="bento-preview-tag">
+              <span>100% Private</span>
+              <span>No Cloud Leaks</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Tabbed Code Showcase -->
+      <section>
+        <div class="section-heading-wrap">
+          <div class="section-tag">PRACTICAL ARCHITECTURE</div>
+          <h2 class="section-title">See Real RouteCase Suites</h2>
+          <p class="section-desc">Clean, human-readable JSON files committed straight to Git alongside your application code.</p>
+        </div>
+
+        <div class="showcase-wrapper">
+          <div class="showcase-tabs-nav" id="showcaseNav">
+            <button class="showcase-tab-btn active" data-target="tab-auth">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              1. Auth Chaining
+            </button>
+            <button class="showcase-tab-btn" data-target="tab-mock">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><circle cx="15.5" cy="15.5" r="1.5"></circle></svg>
+              2. Dynamic Generators
+            </button>
+            <button class="showcase-tab-btn" data-target="tab-assert">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+              3. Contract Assertions
+            </button>
+            <button class="showcase-tab-btn" data-target="tab-env">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+              4. Environment Config
+            </button>
+          </div>
+
+          <!-- Tab 1: Auth -->
+          <div class="showcase-panel active" id="tab-auth">
+            <div class="showcase-panel-header">
+              <h3 class="showcase-panel-title">auth-pipeline.rcase — Login and cascade JWT token to protected endpoint</h3>
+              <span class="trust-pill" style="color: var(--rc-mint);">Zero JavaScript Required</span>
+            </div>
+            <pre class="showcase-code"><code>&#123;
+  <span class="syn-k">"baseUrl"</span>: <span class="syn-s">"https://api.myapp.dev"</span>,
+  <span class="syn-k">"tests"</span>: [
+    &#123;
+      <span class="syn-k">"name"</span>: <span class="syn-s">"Authenticate and Capture Token"</span>,
+      <span class="syn-k">"method"</span>: <span class="syn-m">"POST"</span>,
+      <span class="syn-k">"path"</span>: <span class="syn-s">"/v1/auth/login"</span>,
+      <span class="syn-k">"success"</span>: [&#123;
+        <span class="syn-k">"name"</span>: <span class="syn-s">"Extract accessToken to memory"</span>,
+        <span class="syn-k">"body"</span>: &#123; <span class="syn-k">"email"</span>: <span class="syn-s">"admin@myapp.dev"</span>, <span class="syn-k">"password"</span>: <span class="syn-s">"&#123;&#123;ADMIN_PASS&#125;&#125;"</span> &#125;,
+        <span class="syn-m">"capture"</span>: &#123; <span class="syn-k">"sessionToken"</span>: <span class="syn-s">"data.accessToken"</span>, <span class="syn-k">"orgId"</span>: <span class="syn-s">"data.org.id"</span> &#125;,
+        <span class="syn-k">"expect"</span>: &#123; <span class="syn-k">"status"</span>: <span class="syn-n">200</span> &#125;
       &#125;]
-    &#125;,</code></pre>
-            <div class="codelens-row" style="margin-left: 1.5rem; margin-top: 0.5rem;">
-              <span class="codelens-action">▶ Run Endpoint (GET /users/&#123;id&#125;)</span>
-              <span class="badge-pass">✓ PASS (200 • 19ms)</span>
-            </div>
-            <pre style="margin: 0 0 0 1.5rem; background: transparent; padding: 0;"><code>    &#123;
-      <span style="color:#34D399">"name"</span>: <span style="color:#F8FAFC">"Get User Profile"</span>,
-      <span style="color:#34D399">"method"</span>: <span style="color:#34D399">"GET"</span>,
-      <span style="color:#34D399">"path"</span>: <span style="color:#6EE7B7">"/users/&#123;id&#125;"</span>,
-      <span style="color:#34D399">"headers"</span>: &#123; <span style="color:#34D399">"Authorization"</span>: <span style="color:#FCD34D">"Bearer &#123;&#123;authToken&#125;&#125;"</span> &#125;,
-      <span style="color:#34D399">"success"</span>: [&#123;
-        <span style="color:#34D399">"name"</span>: <span style="color:#F8FAFC">"Fetch authorized user by captured ID"</span>,
-        <span style="color:#34D399">"params"</span>: &#123; <span style="color:#34D399">"id"</span>: <span style="color:#FCD34D">"&#123;&#123;authUserId&#125;&#125;"</span> &#125;,
-        <span style="color:#34D399">"expect"</span>: &#123; <span style="color:#34D399">"status"</span>: <span style="color:#F59E0B">200</span>, <span style="color:#34D399">"maxDurationMs"</span>: <span style="color:#F59E0B">250</span> &#125;
+    &#125;,
+    &#123;
+      <span class="syn-k">"name"</span>: <span class="syn-s">"Fetch Protected Analytics"</span>,
+      <span class="syn-k">"method"</span>: <span class="syn-k">"GET"</span>,
+      <span class="syn-k">"path"</span>: <span class="syn-s">"/v1/organizations/&#123;orgId&#125;/analytics"</span>,
+      <span class="syn-k">"headers"</span>: &#123; <span class="syn-k">"Authorization"</span>: <span class="syn-v">"Bearer &#123;&#123;sessionToken&#125;&#125;"</span> &#125;,
+      <span class="syn-k">"success"</span>: [&#123;
+        <span class="syn-k">"name"</span>: <span class="syn-s">"Returns 200 with captured org context"</span>,
+        <span class="syn-k">"params"</span>: &#123; <span class="syn-k">"orgId"</span>: <span class="syn-v">"&#123;&#123;orgId&#125;&#125;"</span> &#125;,
+        <span class="syn-k">"expect"</span>: &#123; <span class="syn-k">"status"</span>: <span class="syn-n">200</span> &#125;
       &#125;]
     &#125;
   ]
 &#125;</code></pre>
+          </div>
+
+          <!-- Tab 2: Mock -->
+          <div class="showcase-panel" id="tab-mock">
+            <div class="showcase-panel-header">
+              <h3 class="showcase-panel-title">create-user.rcase — Insert fresh record with dynamic UUIDs & timestamps</h3>
+              <span class="trust-pill" style="color: var(--rc-mint);">Collision-Free Mocking</span>
+            </div>
+            <pre class="showcase-code"><code>&#123;
+  <span class="syn-k">"baseUrl"</span>: <span class="syn-s">"http://localhost:3000"</span>,
+  <span class="syn-k">"tests"</span>: [&#123;
+    <span class="syn-k">"name"</span>: <span class="syn-s">"Create User Record"</span>,
+    <span class="syn-k">"method"</span>: <span class="syn-m">"POST"</span>,
+    <span class="syn-k">"path"</span>: <span class="syn-s">"/api/users"</span>,
+    <span class="syn-k">"headers"</span>: &#123; <span class="syn-k">"Content-Type"</span>: <span class="syn-s">"application/json"</span> &#125;,
+    <span class="syn-k">"success"</span>: [&#123;
+      <span class="syn-k">"name"</span>: <span class="syn-s">"Inject unique email, tracking UUID, and timestamp"</span>,
+      <span class="syn-k">"body"</span>: &#123;
+        <span class="syn-k">"userId"</span>: <span class="syn-v">"&#123;&#123;$uuid&#125;&#125;"</span>,
+        <span class="syn-k">"email"</span>: <span class="syn-s">"qa_tester_&#123;&#123;$randomInt&#125;&#125;@example.com"</span>,
+        <span class="syn-k">"createdAt"</span>: <span class="syn-v">"&#123;&#123;$isoTimestamp&#125;&#125;"</span>
+      &#125;,
+      <span class="syn-k">"expect"</span>: &#123; <span class="syn-k">"status"</span>: <span class="syn-n">201</span>, <span class="syn-k">"maxDurationMs"</span>: <span class="syn-n">200</span> &#125;
+    &#125;]
+  &#125;]
+&#125;</code></pre>
+          </div>
+
+          <!-- Tab 3: Assert -->
+          <div class="showcase-panel" id="tab-assert">
+            <div class="showcase-panel-header">
+              <h3 class="showcase-panel-title">assertions.rcase — Verify status codes, body equality & latency thresholds</h3>
+              <span class="trust-pill" style="color: var(--rc-mint);">Strict Contract Guard</span>
+            </div>
+            <pre class="showcase-code"><code>&#123;
+  <span class="syn-k">"baseUrl"</span>: <span class="syn-s">"https://api.internal.dev"</span>,
+  <span class="syn-k">"tests"</span>: [&#123;
+    <span class="syn-k">"name"</span>: <span class="syn-s">"Check Health and Performance SLA"</span>,
+    <span class="syn-k">"method"</span>: <span class="syn-k">"GET"</span>,
+    <span class="syn-k">"path"</span>: <span class="syn-s">"/healthz"</span>,
+    <span class="syn-k">"success"</span>: [&#123;
+      <span class="syn-k">"name"</span>: <span class="syn-s">"Verify service uptime within 150ms SLA"</span>,
+      <span class="syn-k">"expect"</span>: &#123;
+        <span class="syn-k">"status"</span>: <span class="syn-n">200</span>,
+        <span class="syn-k">"maxDurationMs"</span>: <span class="syn-n">150</span>,
+        <span class="syn-k">"body"</span>: &#123; <span class="syn-k">"status"</span>: <span class="syn-s">"healthy"</span>, <span class="syn-k">"database"</span>: <span class="syn-s">"connected"</span> &#125;
+      &#125;
+    &#125;],
+    <span class="syn-k">"failure"</span>: [&#123;
+      <span class="syn-k">"name"</span>: <span class="syn-s">"Reject without API key"</span>,
+      <span class="syn-k">"headers"</span>: &#123; <span class="syn-k">"X-API-Key"</span>: <span class="syn-s">"invalid"</span> &#125;,
+      <span class="syn-k">"expect"</span>: &#123; <span class="syn-k">"status"</span>: <span class="syn-n">401</span> &#125;
+    &#125;]
+  &#125;]
+&#125;</code></pre>
+          </div>
+
+          <!-- Tab 4: Env -->
+          <div class="showcase-panel" id="tab-env">
+            <div class="showcase-panel-header">
+              <h3 class="showcase-panel-title">.rcase.env — Local vs Staging environment variable resolution</h3>
+              <span class="trust-pill" style="color: var(--rc-mint);">Hierarchical Precedence</span>
+            </div>
+            <pre class="showcase-code"><code># RouteCase Workspace Environment (.rcase.env)
+# Priority: In-Memory Captured &gt; .rcase.env &gt; System Process Env
+
+API_BASE_URL=http://localhost:8080/v2
+ADMIN_EMAIL=root@local.dev
+ADMIN_PASS=supersecret_dev_pass
+PAYMENT_GATEWAY_KEY=sk_test_51H8...
+
+# RouteCase automatically masks keys containing PASS, SECRET, or KEY in editor output!</code></pre>
           </div>
         </div>
       </section>
 
       <!-- 4-Step Workflow Pipeline -->
       <section>
-        <div class="section-header">
-          <div class="section-tag">ENGINEERING WORKFLOW</div>
+        <div class="section-heading-wrap">
+          <div class="section-tag">ENGINEERING PIPELINE</div>
           <h2 class="section-title">How RouteCase Works in 4 Steps</h2>
-          <p class="section-desc">From declarative specification to zero-script automated variable chaining inside your VS Code workspace.</p>
+          <p class="section-desc">From declarative contract definition to in-memory variable cascades directly within your IDE.</p>
         </div>
 
-        <div class="rc-workflow-wrapper">
-          <div class="rc-workflow-grid">
-            <div class="rc-workflow-card">
-              <div class="rc-workflow-header">
-                <span class="rc-workflow-step">STEP 01</span>
-                <div class="rc-workflow-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-                </div>
-              </div>
-              <h3 class="rc-workflow-title">Define Contract</h3>
-              <p class="rc-workflow-desc">Structure endpoints, path templates, and mock inputs in a clean <code>.rcase</code> JSON suite with instant schema autocomplete.</p>
-              <div class="rc-workflow-code">
-                <div class="rc-workflow-tag">suite.rcase</div>
-                <div class="rc-workflow-snippet"><span class="tok-k">"path"</span>: <span class="tok-s">"/users/&#123;id&#125;"</span></div>
+        <div class="pipeline-grid">
+          <div class="pipeline-card">
+            <div class="pipeline-card-top">
+              <span class="pipeline-step-badge">STEP 01</span>
+              <div class="pipeline-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line></svg>
               </div>
             </div>
+            <h3 class="pipeline-title">Define Contract</h3>
+            <p class="pipeline-desc">Structure routes, endpoints, and mock input variations in clean <code>.rcase</code> JSON with instant VS Code schema validation.</p>
+            <div class="pipeline-code-pill">"path": "/users/&#123;id&#125;"</div>
+          </div>
 
-            <div class="rc-workflow-card">
-              <div class="rc-workflow-header">
-                <span class="rc-workflow-step">STEP 02</span>
-                <div class="rc-workflow-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                </div>
-              </div>
-              <h3 class="rc-workflow-title">Trigger In-Editor</h3>
-              <p class="rc-workflow-desc">Run full suites, individual routes, or isolated test cases using floating Jupyter-style CodeLens cells with one click.</p>
-              <div class="rc-workflow-code">
-                <div class="rc-workflow-tag">CodeLens Cell</div>
-                <div class="rc-workflow-snippet"><span class="tok-action">▶ Run Endpoint</span> <span class="tok-time">⚡ 28ms</span></div>
+          <div class="pipeline-card">
+            <div class="pipeline-card-top">
+              <span class="pipeline-step-badge">STEP 02</span>
+              <div class="pipeline-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
               </div>
             </div>
+            <h3 class="pipeline-title">Trigger In-Editor</h3>
+            <p class="pipeline-desc">Run full suites, individual routes, or isolated test cases using floating Jupyter-style CodeLens cells with one click.</p>
+            <div class="pipeline-code-pill">▶ Run Endpoint ⚡ 28ms</div>
+          </div>
 
-            <div class="rc-workflow-card">
-              <div class="rc-workflow-header">
-                <span class="rc-workflow-step">STEP 03</span>
-                <div class="rc-workflow-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
-                </div>
-              </div>
-              <h3 class="rc-workflow-title">Verify Assertions</h3>
-              <p class="rc-workflow-desc">Assert HTTP status codes, structured body JSON equality, substring containment, and strict latency SLA thresholds.</p>
-              <div class="rc-workflow-code">
-                <div class="rc-workflow-tag">Contract Guard</div>
-                <div class="rc-workflow-snippet"><span class="tok-pass">✓ status: 200</span> <span class="tok-pass">✓ &lt; 250ms</span></div>
+          <div class="pipeline-card">
+            <div class="pipeline-card-top">
+              <span class="pipeline-step-badge">STEP 03</span>
+              <div class="pipeline-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
               </div>
             </div>
+            <h3 class="pipeline-title">Verify Assertions</h3>
+            <p class="pipeline-desc">Assert HTTP status codes, structured body JSON equality, substring containment, and strict latency SLA thresholds.</p>
+            <div class="pipeline-code-pill">✓ status: 200 • &lt; 250ms</div>
+          </div>
 
-            <div class="rc-workflow-card">
-              <div class="rc-workflow-header">
-                <span class="rc-workflow-step">STEP 04</span>
-                <div class="rc-workflow-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-                </div>
-              </div>
-              <h3 class="rc-workflow-title">Cascade Variables</h3>
-              <p class="rc-workflow-desc">Capture auth tokens and IDs from successful responses to inject them into downstream test cases automatically.</p>
-              <div class="rc-workflow-code">
-                <div class="rc-workflow-tag">Variable Chaining</div>
-                <div class="rc-workflow-snippet"><span class="tok-k">capture</span>: <span class="tok-s">&#123; "token": "jwt" &#125;</span></div>
+          <div class="pipeline-card">
+            <div class="pipeline-card-top">
+              <span class="pipeline-step-badge">STEP 04</span>
+              <div class="pipeline-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
               </div>
             </div>
+            <h3 class="pipeline-title">Cascade Variables</h3>
+            <p class="pipeline-desc">Capture auth tokens and IDs from successful responses to inject them into downstream test cases automatically.</p>
+            <div class="pipeline-code-pill">capture: &#123; "token": "jwt" &#125;</div>
           </div>
         </div>
       </section>
 
-      <!-- Feature Comparison -->
+      <!-- Feature Comparison Matrix -->
       <section>
-        <div class="section-header">
+        <div class="section-heading-wrap">
           <div class="section-tag">COMPETITIVE MATRIX</div>
           <h2 class="section-title">Why Developers Choose RouteCase</h2>
           <p class="section-desc">Comparing architectural capabilities against Postman, REST Client, and Thunder Client.</p>
         </div>
 
-        <div class="rc-comparison-wrapper">
-          <table class="rc-comparison-table">
+        <div class="matrix-table-wrap">
+          <table class="matrix-table">
             <thead>
               <tr>
                 <th>Capability</th>
-                <th>RouteCase</th>
+                <th class="col-rc">RouteCase (Recommended)</th>
                 <th>Postman</th>
                 <th>REST Client</th>
                 <th>Thunder Client</th>
@@ -527,228 +1879,313 @@
             <tbody>
               <tr>
                 <td><strong>Native VS Code Integration</strong></td>
-                <td><span class="rc-status-pill-yes">✅ Native In-Editor</span></td>
-                <td><span class="rc-status-pill-no">❌ External App</span></td>
-                <td><span class="rc-status-pill-yes">✅ In-Editor</span></td>
-                <td><span class="rc-status-pill-yes">✅ In-Editor</span></td>
+                <td class="col-rc">✅ Native In-Editor</td>
+                <td>❌ External Heavyweight App</td>
+                <td>✅ In-Editor</td>
+                <td>✅ In-Editor</td>
               </tr>
               <tr>
                 <td><strong>Declarative JSON Schema</strong></td>
-                <td><span class="rc-status-pill-yes">✅ Yes</span> <code class="rc-code-pill">.rcase</code></td>
-                <td><span class="rc-status-pill-no">❌ Proprietary JSON</span></td>
-                <td><span class="rc-status-pill-no">❌ Plain Text .http</span></td>
-                <td><span class="rc-status-pill-no">❌ Proprietary</span></td>
+                <td class="col-rc">✅ Yes <span class="matrix-pill-tag">.rcase</span></td>
+                <td>❌ Proprietary JSON</td>
+                <td>❌ Plain Text .http</td>
+                <td>❌ Proprietary</td>
               </tr>
               <tr>
                 <td><strong>Jupyter-Style Inline CodeLens</strong></td>
-                <td><span class="rc-status-pill-yes">✅ Floating Cells</span></td>
-                <td><span class="rc-status-pill-no">❌ None</span></td>
-                <td><span class="rc-status-pill-partial">⚠️ Basic Link</span></td>
-                <td><span class="rc-status-pill-no">❌ Separate GUI</span></td>
+                <td class="col-rc">✅ Floating Action Cells</td>
+                <td>❌ None</td>
+                <td>⚠️ Basic Line Link</td>
+                <td>❌ Separate GUI Tab</td>
               </tr>
               <tr>
                 <td><strong>Response Variable Chaining</strong></td>
-                <td><span class="rc-status-pill-yes">✅ Built-in</span> <code class="rc-code-pill">capture</code></td>
-                <td><span class="rc-status-pill-partial">⚠️ Requires JS Scripts</span></td>
-                <td><span class="rc-status-pill-partial">⚠️ Complex Regex</span></td>
-                <td><span class="rc-status-pill-partial">⚠️ Manual GUI</span></td>
+                <td class="col-rc">✅ Built-in <span class="matrix-pill-tag">capture</span></td>
+                <td>⚠️ Requires JS Scripts</td>
+                <td>⚠️ Complex Regex</td>
+                <td>⚠️ Manual GUI</td>
               </tr>
               <tr>
                 <td><strong>Built-in Dynamic Generators</strong></td>
-                <td><span class="rc-status-pill-yes">✅ Built-in</span> <code class="rc-code-pill">&#123;&#123;$uuid&#125;&#125;</code> <code class="rc-code-pill">&#123;&#123;$timestamp&#125;&#125;</code></td>
-                <td><span class="rc-status-pill-yes">✅ Dynamic Mocking</span></td>
-                <td><span class="rc-status-pill-no">❌ Limited</span></td>
-                <td><span class="rc-status-pill-partial">⚠️ Partial</span></td>
+                <td class="col-rc">✅ Built-in <span class="matrix-pill-tag">&#123;&#123;$uuid&#125;&#125;</span></td>
+                <td>✅ Dynamic Mocking</td>
+                <td>❌ Limited</td>
+                <td>⚠️ Partial</td>
               </tr>
               <tr>
                 <td><strong>Environment Variables (.env)</strong></td>
-                <td><span class="rc-status-pill-yes">✅ Supported</span> <code class="rc-code-pill">.rcase.env</code></td>
-                <td><span class="rc-status-pill-partial">⚠️ Cloud Workspaces</span></td>
-                <td><span class="rc-status-pill-partial">⚠️ Settings-based</span></td>
-                <td><span class="rc-status-pill-partial">⚠️ Environment Tabs</span></td>
+                <td class="col-rc">✅ Supported <span class="matrix-pill-tag">.rcase.env</span></td>
+                <td>⚠️ Cloud Workspaces</td>
+                <td>⚠️ Settings-based</td>
+                <td>⚠️ Environment Tabs</td>
               </tr>
               <tr>
                 <td><strong>Instant Copy as cURL</strong></td>
-                <td><span class="rc-status-pill-yes">✅ Right-Click</span> <code class="rc-code-pill">cURL</code></td>
-                <td><span class="rc-status-pill-yes">✅ Supported</span></td>
-                <td><span class="rc-status-pill-partial">⚠️ Manual</span></td>
-                <td><span class="rc-status-pill-yes">✅ Supported</span></td>
+                <td class="col-rc">✅ Right-Click &amp; Editor Menu</td>
+                <td>✅ Supported</td>
+                <td>⚠️ Manual</td>
+                <td>✅ Supported</td>
               </tr>
               <tr>
                 <td><strong>OpenAPI / Swagger Importer</strong></td>
-                <td><span class="rc-status-pill-yes">✅ Native Zero-Dep</span> <code class="rc-code-pill">OpenAPI 3.x</code></td>
-                <td><span class="rc-status-pill-partial">⚠️ Cloud Importer</span></td>
-                <td><span class="rc-status-pill-no">❌ Plugin Required</span></td>
-                <td><span class="rc-status-pill-partial">⚠️ Paid Tier</span></td>
+                <td class="col-rc">✅ Native Zero-Dep <span class="matrix-pill-tag">OpenAPI 3.x</span></td>
+                <td>⚠️ Cloud Importer</td>
+                <td>❌ Plugin Required</td>
+                <td>⚠️ Paid Tier</td>
               </tr>
               <tr>
                 <td><strong>Zero Cloud / No Forced Login</strong></td>
-                <td><span class="rc-status-pill-yes">✅ 100% Offline & Free</span></td>
-                <td><span class="rc-status-pill-no">❌ Forced Cloud Account</span></td>
-                <td><span class="rc-status-pill-yes">✅ Offline</span></td>
-                <td><span class="rc-status-pill-partial">⚠️ Paid Features</span></td>
+                <td class="col-rc">✅ 100% Offline &amp; Free</td>
+                <td>❌ Forced Cloud Account</td>
+                <td>✅ Offline</td>
+                <td>⚠️ Paid Features</td>
               </tr>
               <tr>
                 <td><strong>Automatic Secret Redaction</strong></td>
-                <td><span class="rc-status-pill-yes">✅ Built-in</span> <code class="rc-code-pill">[REDACTED]</code></td>
-                <td><span class="rc-status-pill-no">❌ Manual Masking</span></td>
-                <td><span class="rc-status-pill-no">❌ Plaintext in Logs</span></td>
-                <td><span class="rc-status-pill-partial">⚠️ Basic</span></td>
+                <td class="col-rc">✅ Built-in <span class="matrix-pill-tag">[REDACTED]</span></td>
+                <td>❌ Manual Masking</td>
+                <td>❌ Plaintext in Logs</td>
+                <td>⚠️ Basic</td>
               </tr>
             </tbody>
           </table>
         </div>
       </section>
 
-      <!-- FAQ Section -->
+      <!-- Frequently Asked Questions -->
       <section>
-        <div class="section-header">
+        <div class="section-heading-wrap">
           <div class="section-tag">FREQUENTLY ASKED QUESTIONS</div>
-          <h2 class="section-title">Common Developer Questions</h2>
-          <p class="section-desc">Everything you need to know about RouteCase architecture, privacy, compatibility, and licensing.</p>
+          <h2 class="section-title">Common Developer Inquiries</h2>
+          <p class="section-desc">Facts about RouteCase architecture, privacy, compatibility, and licensing.</p>
         </div>
 
-        <div class="rc-faq-container">
-          <details class="rc-faq-item" open>
-            <summary class="rc-faq-summary">
-              <span class="rc-faq-question">What file extensions does RouteCase support?</span>
-              <span class="rc-faq-badge">Syntax & Schema</span>
-              <span class="rc-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+        <div class="faq-list">
+          <details class="faq-card" open>
+            <summary class="faq-header">
+              <span class="faq-q-text">What file extensions does RouteCase support?</span>
+              <span class="faq-tag">Syntax &amp; Schema</span>
+              <span class="faq-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
             </summary>
-            <div class="rc-faq-content">
-              <p>RouteCase uses <code>.rcase</code> as its primary extension, and also fully recognizes <code>.routecase</code> and <code>*.rcase.json</code> files. When opened in VS Code, all files automatically activate the RouteCase language grammar, bundled JSON schema validation, hover tooltips, and real-time syntax checking.</p>
+            <div class="faq-body">
+              RouteCase uses <code>.rcase</code> as its primary extension, and also fully recognizes <code>.routecase</code> and <code>*.rcase.json</code> files. When opened in VS Code, all files automatically activate the RouteCase language grammar, bundled JSON schema validation, hover tooltips, and real-time syntax checking.
             </div>
           </details>
 
-          <details class="rc-faq-item">
-            <summary class="rc-faq-summary">
-              <span class="rc-faq-question">Does RouteCase require a cloud account, login, or telemetry?</span>
-              <span class="rc-faq-badge">Privacy & Offline</span>
-              <span class="rc-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+          <details class="faq-card">
+            <summary class="faq-header">
+              <span class="faq-q-text">Does RouteCase require an account, login, or internet telemetry?</span>
+              <span class="faq-tag">Privacy &amp; Offline</span>
+              <span class="faq-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
             </summary>
-            <div class="rc-faq-content">
-              <p><strong>Zero accounts, zero cloud dependencies, zero tracking.</strong> RouteCase is 100% offline and runs strictly on your local machine. Your API credentials, payloads, tokens, and test suites never leave your development environment. Sensitive headers like <code>Authorization</code>, <code>apiKey</code>, and session cookies are automatically masked with <code>[REDACTED]</code> in all log outputs.</p>
+            <div class="faq-body">
+              <strong>Zero accounts, zero cloud dependencies, zero tracking.</strong> RouteCase is 100% offline and runs strictly on your local machine. Your API credentials, payloads, tokens, and test suites never leave your development environment. Sensitive headers like <code>Authorization</code>, <code>apiKey</code>, and session cookies are automatically masked with <code>[REDACTED]</code> in all log outputs.
             </div>
           </details>
 
-          <details class="rc-faq-item">
-            <summary class="rc-faq-summary">
-              <span class="rc-faq-question">Can I test local development servers without starting a proxy?</span>
-              <span class="rc-faq-badge">Local Testing</span>
-              <span class="rc-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+          <details class="faq-card">
+            <summary class="faq-header">
+              <span class="faq-q-text">Can I test local development servers without starting a proxy?</span>
+              <span class="faq-tag">Local Testing</span>
+              <span class="faq-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
             </summary>
-            <div class="rc-faq-content">
-              <p>Yes! RouteCase connects directly to any reachable endpoint—including <code>http://localhost:3000</code>, <code>http://127.0.0.1:8080</code>, local Docker containers, private VPN environments, and public internet APIs. No separate background daemon or browser companion is required.</p>
+            <div class="faq-body">
+              Yes! RouteCase connects directly to any reachable endpoint—including <code>http://localhost:3000</code>, <code>http://127.0.0.1:8080</code>, local Docker containers, private VPN environments, and public internet APIs. No separate background daemon or browser companion is required.
             </div>
           </details>
 
-          <details class="rc-faq-item">
-            <summary class="rc-faq-summary">
-              <span class="rc-faq-question">How does variable chaining and token capture work?</span>
-              <span class="rc-faq-badge">Workflow Automation</span>
-              <span class="rc-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+          <details class="faq-card">
+            <summary class="faq-header">
+              <span class="faq-q-text">How does variable chaining and token capture work?</span>
+              <span class="faq-tag">Workflow Automation</span>
+              <span class="faq-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
             </summary>
-            <div class="rc-faq-content">
-              <p>In any test case, provide a <code>capture</code> map to extract response JSON properties using dot notation (e.g. <code>"authToken": "data.accessToken"</code>). RouteCase persists these variables in memory during the execution run, enabling subsequent requests to reference them via template syntax: <code>"Authorization": "Bearer &#123;&#123;authToken&#125;&#125;"</code>.</p>
+            <div class="faq-body">
+              In any test case, provide a <code>capture</code> map to extract response JSON properties using dot notation (e.g. <code>"authToken": "data.accessToken"</code>). RouteCase persists these variables in memory during the execution run, enabling subsequent requests to reference them via template syntax: <code>"Authorization": "Bearer &#123;&#123;authToken&#125;&#125;"</code>.
             </div>
           </details>
 
-          <details class="rc-faq-item">
-            <summary class="rc-faq-summary">
-              <span class="rc-faq-question">Can I import my existing OpenAPI 3.0 or Swagger 2.0 specifications?</span>
-              <span class="rc-faq-badge">Migration</span>
-              <span class="rc-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+          <details class="faq-card">
+            <summary class="faq-header">
+              <span class="faq-q-text">Can I import existing OpenAPI 3.0 or Swagger 2.0 specifications?</span>
+              <span class="faq-tag">Migration</span>
+              <span class="faq-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
             </summary>
-            <div class="rc-faq-content">
-              <p>Yes. RouteCase includes a native, zero-dependency OpenAPI importer. Press <code>Ctrl+Shift+P</code> (or <code>Cmd+Shift+P</code> on macOS), run <strong><code>RouteCase: Import from OpenAPI / Swagger</code></strong>, select your JSON spec, and RouteCase instantly transforms your operations, paths, parameters, and schemas into executable <code>.rcase</code> suites.</p>
+            <div class="faq-body">
+              Yes. RouteCase includes a native, zero-dependency OpenAPI importer. Press <code>Ctrl+Shift+P</code> (or <code>Cmd+Shift+P</code> on macOS), run <strong><code>RouteCase: Import from OpenAPI / Swagger</code></strong>, select your JSON spec, and RouteCase instantly transforms your operations, paths, parameters, and schemas into executable <code>.rcase</code> suites.
             </div>
           </details>
 
-          <details class="rc-faq-item">
-            <summary class="rc-faq-summary">
-              <span class="rc-faq-question">How do I install RouteCase in Visual Studio Code?</span>
-              <span class="rc-faq-badge">Installation</span>
-              <span class="rc-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+          <details class="faq-card">
+            <summary class="faq-header">
+              <span class="faq-q-text">How do I install RouteCase in Visual Studio Code?</span>
+              <span class="faq-tag">Installation</span>
+              <span class="faq-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
             </summary>
-            <div class="rc-faq-content">
-              <p>Open VS Code, press <code>Ctrl+Shift+X</code> (or <code>Cmd+Shift+X</code>), search for <strong><code>RouteCase</code></strong>, and click <strong>Install</strong>. Alternatively, install it directly from your command line with:</p>
-              <p><code>code --install-extension UtkarshKumar.routecase</code></p>
+            <div class="faq-body">
+              Open VS Code, press <code>Ctrl+Shift+X</code> (or <code>Cmd+Shift+X</code>), search for <strong><code>RouteCase</code></strong>, and click <strong>Install</strong>. Alternatively, install it directly from your command line with:
+              <br /><br />
+              <code>code --install-extension UtkarshKumar.routecase</code>
             </div>
           </details>
         </div>
       </section>
 
-      <!-- Creator & Author Profile Section -->
-      <section class="author-card">
-        <div class="author-info">
-          <h3>Designed & Engineered by Utkarsh Kumar (utkarshkumar712)</h3>
+      <!-- Creator & Author Profile Spotlight -->
+      <section class="author-spotlight">
+        <div class="author-left">
+          <h3>Designed &amp; Engineered by Utkarsh Kumar (utkarshkumar712)</h3>
           <p>
-            RouteCase is an open-source project created by Utkarsh Kumar to provide developers with a fast, offline-first, Git-friendly alternative to bloated API testing clients.
+            RouteCase is crafted by Utkarsh Kumar to provide developers with a fast, offline-first, Git-friendly alternative to bloated API testing clients. Built with native TypeScript for Visual Studio Code.
           </p>
-          <div class="author-links">
-            <a href="https://github.com/UTKARSHKUMAR712" target="_blank" rel="noopener" class="btn-primary" style="padding: 8px 16px;">
-              Follow on GitHub (@UTKARSHKUMAR712)
+          <div class="author-btns">
+            <a href="https://github.com/UTKARSHKUMAR712" target="_blank" rel="noopener" class="btn-author-gh">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub (@UTKARSHKUMAR712)
             </a>
-            <a href="https://www.linkedin.com/in/utkarsh-kumar-8344b1337" target="_blank" rel="noopener" class="btn-secondary" style="padding: 8px 16px;">
+            <a href="https://www.linkedin.com/in/utkarsh-kumar-8344b1337" target="_blank" rel="noopener" class="btn-author-li">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
               Connect on LinkedIn
             </a>
           </div>
         </div>
-        <div style="font-family: monospace; font-size: 0.85rem; color: var(--rc-mint); background: rgba(0,0,0,0.4); padding: 16px; border-radius: 8px; border: 1px solid var(--rc-border);">
+
+        <div class="author-terminal">
           <div>// Extension Author: Utkarsh Kumar</div>
           <div>// Publisher ID: UtkarshKumar</div>
-          <div>// GitHub: UTKARSHKUMAR712</div>
-          <div>// License: MIT (Free & Open Source)</div>
+          <div>// GitHub Handle: UTKARSHKUMAR712</div>
+          <div>// Extension Name: routecase</div>
+          <div>// Version: 0.2.0 • MIT License</div>
+        </div>
+      </section>
+
+      <!-- Pre-Footer CTA Banner -->
+      <section class="cta-banner">
+        <h2>Start Testing APIs Inside VS Code Today</h2>
+        <p>No account creation. No cloud subscriptions. Zero telemetry. Download RouteCase and execute your first endpoint test in under 60 seconds.</p>
+        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+          <a href="https://marketplace.visualstudio.com/items?itemName=UtkarshKumar.routecase" target="_blank" rel="noopener" class="btn-cta-primary">
+            Install for VS Code Free
+          </a>
+          <a href="/getting-started/quickstart/" class="btn-cta-secondary">
+            Quickstart Guide (3 Mins) →
+          </a>
         </div>
       </section>
     </main>
 
-    <!-- Footer -->
+    <!-- Global Footer -->
     <footer>
       <div class="container">
         <div class="footer-grid">
-          <div>
-            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1rem;">
-              <img src="/logo.png" alt="RouteCase" style="width: 28px; height: 28px;" />
-              <span style="font-weight: 700; color: #fff; font-size: 1.15rem;">RouteCase</span>
+          <div class="footer-brand">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem;">
+              <div class="logo-icon-wrap" style="width: 32px; height: 32px;">
+                <img src="/logo.png" alt="RouteCase" width="32" height="32" />
+              </div>
+              <span style="font-weight: 700; color: #FFFFFF; font-size: 1.2rem;">RouteCase</span>
             </div>
-            <p style="color: var(--rc-text-muted); font-size: 0.9rem; line-height: 1.6; max-width: 340px;">
-              Modern in-editor API route & endpoint testing for Visual Studio Code. Created by Utkarsh Kumar (utkarshkumar712).
+            <p>
+              Modern in-editor API route &amp; endpoint testing for Visual Studio Code. Engineered by Utkarsh Kumar (utkarshkumar712).
             </p>
           </div>
+
           <div class="footer-col">
             <h4>Documentation</h4>
             <ul>
               <li><a href="/introduction/">What is RouteCase?</a></li>
               <li><a href="/getting-started/quickstart/">Quickstart (3 Mins)</a></li>
               <li><a href="/getting-started/installation/">Installation Guide</a></li>
-              <li><a href="/reference/schema-specification/">Schema Reference</a></li>
+              <li><a href="/reference/schema-specification/">Schema Specification</a></li>
+              <li><a href="/reference/assertions/">Assertions Reference</a></li>
             </ul>
           </div>
+
           <div class="footer-col">
-            <h4>Features & Guides</h4>
+            <h4>Features &amp; Guides</h4>
             <ul>
               <li><a href="/variables/dynamic-generators/">Dynamic Generators</a></li>
               <li><a href="/variables/token-chaining/">Token Chaining</a></li>
               <li><a href="/tutorials/express-api/">Express REST Tutorial</a></li>
               <li><a href="/tutorials/openapi-import/">OpenAPI Importer</a></li>
+              <li><a href="/core-concepts/results-and-debugging/">Debugging Test Results</a></li>
             </ul>
           </div>
+
           <div class="footer-col">
-            <h4>Author & Community</h4>
+            <h4>Author &amp; Machine Data</h4>
             <ul>
               <li><a href="https://github.com/UTKARSHKUMAR712" target="_blank" rel="noopener">GitHub (@UTKARSHKUMAR712)</a></li>
               <li><a href="https://www.linkedin.com/in/utkarsh-kumar-8344b1337" target="_blank" rel="noopener">LinkedIn Profile</a></li>
               <li><a href="https://marketplace.visualstudio.com/items?itemName=UtkarshKumar.routecase" target="_blank" rel="noopener">VS Code Marketplace</a></li>
+              <li><a href="/llms.txt">llms.txt (AI Discovery)</a></li>
+              <li><a href="/humans.txt">humans.txt (Team Credits)</a></li>
               <li><a href="/reference/license/">MIT License</a></li>
             </ul>
           </div>
         </div>
+
         <div class="footer-bottom">
-          <span>Copyright &copy; 2026 RouteCase. Crafted by <a href="https://github.com/UTKARSHKUMAR712" style="color: var(--rc-mint); text-decoration: none;">Utkarsh Kumar (utkarshkumar712)</a>.</span>
-          <span>Released under the MIT License. Zero telemetry. 100% Offline.</span>
+          <span>Copyright &copy; 2026 RouteCase. Crafted with precision by <a href="https://github.com/UTKARSHKUMAR712" target="_blank" rel="noopener" style="color: var(--rc-mint); text-decoration: none;">Utkarsh Kumar (utkarshkumar712)</a>.</span>
+          <span>Released under MIT License. 100% Offline • Zero Telemetry.</span>
         </div>
       </div>
     </footer>
+
+    <!-- Interactive Client Scripts -->
+    <script>
+      // 1. Interactive Copy-to-Clipboard for CLI Install Command
+      const cliCopyBtn = document.getElementById('cliCopyBtn');
+      const cliCopyText = document.getElementById('cliCopyText');
+      const cliCommand = document.getElementById('cliCommand');
+
+      if (cliCopyBtn && cliCommand && cliCopyText) {
+        cliCopyBtn.addEventListener('click', () => {
+          const textToCopy = cliCommand.textContent || '';
+          navigator.clipboard.writeText(textToCopy).then(() => {
+            cliCopyText.textContent = 'Copied! ✓';
+            cliCopyBtn.style.background = 'rgba(16, 185, 129, 0.3)';
+            cliCopyBtn.style.borderColor = 'rgba(52, 211, 153, 0.7)';
+            setTimeout(() => {
+              cliCopyText.textContent = 'Copy';
+              cliCopyBtn.style.background = '';
+              cliCopyBtn.style.borderColor = '';
+            }, 2000);
+          }).catch(err => {
+            console.error('Failed to copy: ', err);
+          });
+        });
+      }
+
+      // 2. Interactive Real-World Code Showcase Tabs
+      const tabBtns = document.querySelectorAll('.showcase-tab-btn');
+      const tabPanels = document.querySelectorAll('.showcase-panel');
+
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetId = btn.getAttribute('data-target');
+          if (!targetId) return;
+
+          tabBtns.forEach(b => b.classList.remove('active'));
+          tabPanels.forEach(p => p.classList.remove('active'));
+
+          btn.classList.add('active');
+          const activePanel = document.getElementById(targetId);
+          if (activePanel) {
+            activePanel.classList.add('active');
+          }
+        });
+      });
+
+      // 3. Mobile Navigation Drawer Toggle
+      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+      const mobileDrawer = document.getElementById('mobileDrawer');
+
+      if (mobileMenuToggle && mobileDrawer) {
+        mobileMenuToggle.addEventListener('click', () => {
+          mobileDrawer.classList.toggle('open');
+        });
+      }
+    </script>
   </body>
 </html>

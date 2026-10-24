@@ -22,9 +22,9 @@
 - 100% Offline & Private: Zero telemetry, zero cloud dependencies, zero forced logins.
 
 ## Key Links & Documentation
-- Getting Started: https://routecase.dev/docs/getting-started/quickstart/
-- Full Schema Specification: https://routecase.dev/docs/reference/schema-specification/
-- Assertions Engine: https://routecase.dev/docs/reference/assertions/
-- Variable Chaining & Token Capture: https://routecase.dev/docs/variables/token-chaining/
-- Dynamic Built-in Generators: https://routecase.dev/docs/variables/dynamic-generators/
+- Getting Started: https://routecase.dev/getting-started/quickstart/
+- Full Schema Specification: https://routecase.dev/reference/schema-specification/
+- Assertions Engine: https://routecase.dev/reference/assertions/
+- Variable Chaining & Token Capture: https://routecase.dev/variables/token-chaining/
+- Dynamic Built-in Generators: https://routecase.dev/variables/dynamic-generators/
 - Full Concatenated Documentation: https://routecase.dev/llms-full.txt
