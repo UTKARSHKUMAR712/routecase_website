@@ -42,5 +42,6 @@ User-agent: Amazonbot
 Allow: /
 
 # Canonical Sitemaps
+Sitemap: https://routecase.vercel.app/sitemap-index.xml
+Sitemap: https://routecase.vercel.app/sitemap.xml
 Sitemap: https://routecase.dev/sitemap.xml
-Sitemap: https://utkarshkumar712.github.io/routecase_website/sitemap.xml

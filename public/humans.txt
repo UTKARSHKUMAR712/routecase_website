@@ -7,7 +7,7 @@ Role: Full-Stack Developer, VS Code Extension Author & Systems Engineer
 /* PROJECT */
 Name: RouteCase
 Description: Modern In-Editor API Route & Endpoint Testing for Visual Studio Code
-Website: https://routecase.dev
+Website: https://routecase.vercel.app
 Website Repository: https://github.com/UTKARSHKUMAR712/routecase_website
 Extension Repository: https://github.com/UTKARSHKUMAR712/routecase
 Marketplace: https://marketplace.visualstudio.com/items?itemName=UtkarshKumar.routecase

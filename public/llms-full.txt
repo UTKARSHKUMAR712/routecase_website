@@ -117,6 +117,8 @@ RouteCase validates responses against up to five simultaneous assertion criteria
 # 6. Author Information & Contact
 
 RouteCase is designed and maintained by Utkarsh Kumar.
+- Official Website: https://routecase.vercel.app/
+- Documentation: https://routecase.vercel.app/introduction/
 - Personal GitHub: https://github.com/UTKARSHKUMAR712
 - LinkedIn: https://www.linkedin.com/in/utkarsh-kumar-8344b1337
 - Extension Listing: https://marketplace.visualstudio.com/items?itemName=UtkarshKumar.routecase

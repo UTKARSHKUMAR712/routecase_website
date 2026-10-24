@@ -1,12 +1,29 @@
 # RouteCase Documentation Portal & Marketing Website
 
-Official marketing website and comprehensive developer documentation portal for **RouteCase**, engineered with **Astro** and **Starlight**.
+[![Vercel Deployment](https://img.shields.io/badge/Deployed%20on-Vercel-000000.svg?logo=vercel&logoColor=white)](https://routecase.vercel.app/)
+[![Live URL](https://img.shields.io/badge/Live%20URL-routecase.vercel.app-10B981.svg)](https://routecase.vercel.app/)
+[![Built with Astro](https://img.shields.io/badge/Built%20with-Astro%20v5-FF5D01.svg?logo=astro&logoColor=white)](https://astro.build/)
+[![Documentation Engine](https://img.shields.io/badge/Docs-Starlight-34D399.svg)](https://starlight.astro.build/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-- **Author & Creator:** [Utkarsh Kumar (utkarshkumar712)](https://github.com/UTKARSHKUMAR712)
-- **LinkedIn:** [https://www.linkedin.com/in/utkarsh-kumar-8344b1337](https://www.linkedin.com/in/utkarsh-kumar-8344b1337)
-- **Website Repository:** [https://github.com/UTKARSHKUMAR712/routecase_website](https://github.com/UTKARSHKUMAR712/routecase_website)
-- **Extension Repository:** [https://github.com/UTKARSHKUMAR712/routecase](https://github.com/UTKARSHKUMAR712/routecase)
-- **VS Code Marketplace:** [UtkarshKumar.routecase](https://marketplace.visualstudio.com/items?itemName=UtkarshKumar.routecase)
+Official marketing website and comprehensive developer documentation portal for **RouteCase**, engineered with **Astro** and **Starlight**, deployed globally on **Vercel**.
+
+- 🌐 **Live Website:** [https://routecase.vercel.app/](https://routecase.vercel.app/)
+- 📖 **Documentation Portal:** [https://routecase.vercel.app/introduction/](https://routecase.vercel.app/introduction/)
+- 👨‍💻 **Author & Creator:** [Utkarsh Kumar (utkarshkumar712)](https://github.com/UTKARSHKUMAR712)
+- 💼 **LinkedIn Profile:** [https://www.linkedin.com/in/utkarsh-kumar-8344b1337](https://www.linkedin.com/in/utkarsh-kumar-8344b1337)
+- 📦 **VS Code Marketplace:** [UtkarshKumar.routecase](https://marketplace.visualstudio.com/items?itemName=UtkarshKumar.routecase)
+- 💻 **Website Repository:** [https://github.com/UTKARSHKUMAR712/routecase_website](https://github.com/UTKARSHKUMAR712/routecase_website)
+- 🔌 **Extension Repository:** [https://github.com/UTKARSHKUMAR712/routecase](https://github.com/UTKARSHKUMAR712/routecase)
+
+---
+
+## ⚡ Deployment on Vercel
+
+The website is continuously deployed on **Vercel** via GitHub integration:
+- **Production URL:** [https://routecase.vercel.app/](https://routecase.vercel.app/)
+- **Configuration:** `vercel.json` with strict security headers (`X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy: strict-origin-when-cross-origin`) and caching optimizations.
+- Every commit pushed to the `main` branch of [routecase_website](https://github.com/UTKARSHKUMAR712/routecase_website) triggers an automated build and zero-downtime deployment.
 
 ---
 
@@ -15,6 +32,7 @@ Official marketing website and comprehensive developer documentation portal for 
 - **Framework:** [Astro](https://astro.build/) (Static Site Generation, 0 KB client JS by default)
 - **Documentation Engine:** [Starlight](https://starlight.astro.build/) (Multi-tier sidebar, breadcrumbs, table of contents)
 - **Search Engine:** [Pagefind](https://pagefind.app/) (Offline client-side instant search, zero external APIs)
+- **Deployment Platform:** [Vercel](https://vercel.com/) (Edge CDN, SSL, continuous delivery)
 - **Styling:** Custom Obsidian Slate (`#0B0F17`) and Vibrant Emerald (`#10B981` / `#34D399`) design system
 - **SEO & AI Bot Files:**
   - `robots.txt` — Comprehensive crawler and AI agent permissions (GPTBot, ClaudeBot, Gemini, Perplexity)
@@ -62,13 +80,14 @@ website/
 │   │   └── custom.css          # Emerald / Mint Obsidian design system
 │   └── content.config.ts       # Astro Content Collections loader definition
 ├── astro.config.mjs            # Astro, Starlight, and Sitemap configuration
+├── vercel.json                 # Vercel deployment and security header configuration
 ├── package.json                # Project dependencies and npm scripts
 └── tsconfig.json               # TypeScript configuration
 ```
 
 ---
 
-## Local Development
+## Local Development & Build
 
 ```bash
 # Install dependencies
@@ -88,4 +107,4 @@ npm run preview
 
 ## License
 
-Released under the [MIT License](https://opensource.org/licenses/MIT). Created and maintained by Utkarsh Kumar.
+Released under the [MIT License](https://opensource.org/licenses/MIT). Created and engineered by Utkarsh Kumar.

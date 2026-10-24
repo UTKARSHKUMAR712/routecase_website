@@ -3,7 +3,7 @@ import starlight from '@astrojs/starlight';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://routecase.dev',
+  site: 'https://routecase.vercel.app',
   integrations: [
     starlight({
       title: 'RouteCase',

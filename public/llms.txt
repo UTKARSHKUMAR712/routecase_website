@@ -22,9 +22,10 @@
 - 100% Offline & Private: Zero telemetry, zero cloud dependencies, zero forced logins.
 
 ## Key Links & Documentation
-- Getting Started: https://routecase.dev/getting-started/quickstart/
-- Full Schema Specification: https://routecase.dev/reference/schema-specification/
-- Assertions Engine: https://routecase.dev/reference/assertions/
-- Variable Chaining & Token Capture: https://routecase.dev/variables/token-chaining/
-- Dynamic Built-in Generators: https://routecase.dev/variables/dynamic-generators/
-- Full Concatenated Documentation: https://routecase.dev/llms-full.txt
+- Official Website: https://routecase.vercel.app/
+- Getting Started: https://routecase.vercel.app/getting-started/quickstart/
+- Full Schema Specification: https://routecase.vercel.app/reference/schema-specification/
+- Assertions Engine: https://routecase.vercel.app/reference/assertions/
+- Variable Chaining & Token Capture: https://routecase.vercel.app/variables/token-chaining/
+- Dynamic Built-in Generators: https://routecase.vercel.app/variables/dynamic-generators/
+- Full Concatenated Documentation: https://routecase.vercel.app/llms-full.txt
