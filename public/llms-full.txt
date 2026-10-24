@@ -1,0 +1,125 @@
+# RouteCase Complete Knowledge Base & Technical Documentation
+
+Created & Maintained by: Utkarsh Kumar (utkarshkumar712)
+GitHub: https://github.com/UTKARSHKUMAR712
+LinkedIn: https://www.linkedin.com/in/utkarsh-kumar-8344b1337
+VS Code Marketplace: https://marketplace.visualstudio.com/items?itemName=UtkarshKumar.routecase
+Extension Repository: https://github.com/UTKARSHKUMAR712/routecase
+Website Repository: https://github.com/UTKARSHKUMAR712/routecase_website
+
+---
+
+# 1. Product Overview
+
+RouteCase is a developer-centric Visual Studio Code extension engineered by Utkarsh Kumar that revolutionizes API route and endpoint testing. Rather than switching to heavy, separate desktop applications (such as Postman or Insomnia) or writing raw curl scripts, RouteCase allows developers to define API endpoints and multiple execution cases in declarative `.rcase` JSON files inside their codebase.
+
+Key architectural benefits:
+- Git-Versioned: Tests live directly in your repository next to your code.
+- Zero Cloud Lock-In: 100% offline, local execution. No cloud accounts, no forced logins.
+- Jupyter-Style Inline Feedback: Floating CodeLens cells render execution triggers and pass/fail badges directly above endpoints and test cases.
+- Scriptless Automation: Response variable extraction (`capture`) enables automated token chaining without writing boilerplate JavaScript.
+- Built-in Mock Generators: Generates UUIDs, timestamps, emails, integers, and names without external libraries.
+- Native Zero-Dependency OpenAPI Importer: Converts OpenAPI 3.x and Swagger 2.x files into runnable suites with one command.
+
+---
+
+# 2. File Format Specification (.rcase)
+
+RouteCase files are standard JSON documents with the `.rcase`, `.routecase`, or `*.rcase.json` extension.
+
+Root Structure:
+```json
+{
+  "baseUrl": "https://api.example.com",
+  "headers": {
+    "Accept": "application/json"
+  },
+  "tests": [
+    {
+      "name": "Endpoint Group Name",
+      "method": "GET | POST | PUT | PATCH | DELETE | HEAD | OPTIONS",
+      "path": "/api/v1/resource/{id}",
+      "headers": {},
+      "success": [
+        {
+          "name": "Scenario Title",
+          "params": { "id": "123" },
+          "query": { "include": "details" },
+          "headers": {},
+          "body": {},
+          "capture": { "savedId": "data.id" },
+          "expect": {
+            "status": 200,
+            "bodyContains": "success",
+            "bodyEquals": { "status": "ok" },
+            "headers": { "content-type": "application/json" },
+            "maxDurationMs": 250
+          }
+        }
+      ],
+      "errors": [
+        {
+          "name": "Invalid Scenario",
+          "params": { "id": "invalid" },
+          "expect": {
+            "status": 404
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+---
+
+# 3. Variable System & Resolution Order
+
+RouteCase evaluates template placeholders in the following strict precedence:
+
+1. Captured Variables (`capture`): Variables extracted from preceding test cases during the active suite run.
+2. Workspace Environment Files:
+   - `.rcase.env`: Standard KEY=VALUE dotenv format.
+   - `.rcase.env.json`: Structured JSON key-value map.
+3. VS Code Workspace Settings: `routecase.env` in settings.json.
+4. Dynamic Built-in Generators:
+   - `{{$uuid}}`: Version 4 RFC-4122 random UUID string.
+   - `{{$timestamp}}`: Current Unix epoch timestamp in milliseconds.
+   - `{{$isoDate}}`: Current UTC date-time string in ISO 8601 format.
+   - `{{$randomEmail}}`: Realistic random test email.
+   - `{{$randomInt}}`: Random 4-digit integer between 1000 and 9999.
+   - `{{$randomName}}`: Realistic developer test name.
+
+Path parameters `{param}` in `path` templates are substituted from the test case `params` map with safe WHATWG URL encoding.
+
+---
+
+# 4. Multi-Level Assertion Engine
+
+RouteCase validates responses against up to five simultaneous assertion criteria:
+
+1. `status`: Mandatory HTTP status integer (e.g. 200, 201, 204, 400, 401, 404, 500).
+2. `bodyContains`: Substring search within the raw response text.
+3. `bodyEquals`: Deep recursive equality matching. If an object is specified, response JSON is parsed and structurally compared.
+4. `headers`: Key-value map of expected response headers, compared case-insensitively.
+5. `maxDurationMs`: Strict SLA latency ceiling. Test fails if response time exceeds this value.
+
+---
+
+# 5. Security & Privacy Architecture
+
+- Zero Telemetry: No request bodies, headers, URLs, or metadata are ever transmitted to third-party analytics servers.
+- Automatic Secret Redaction: Case-insensitive scanner automatically masks `Authorization`, `Proxy-Authorization`, `Cookie`, `Set-Cookie`, `x-api-key`, `api-key`, `x-auth-token`, `token`, `secret`, `access-token`, `session-id`, and `x-amz-security-token` with `[REDACTED]`.
+- XSS Prevention: Results panel HTML webview safely escapes all user input and API responses before rendering.
+
+---
+
+# 6. Author Information & Contact
+
+RouteCase is designed and maintained by Utkarsh Kumar.
+- Personal GitHub: https://github.com/UTKARSHKUMAR712
+- LinkedIn: https://www.linkedin.com/in/utkarsh-kumar-8344b1337
+- Extension Listing: https://marketplace.visualstudio.com/items?itemName=UtkarshKumar.routecase
+- Open-Source Repositories:
+  - https://github.com/UTKARSHKUMAR712/routecase
+  - https://github.com/UTKARSHKUMAR712/routecase_website

@@ -1,0 +1,7 @@
+Contact: https://github.com/UTKARSHKUMAR712/routecase/security/advisories
+Contact: https://www.linkedin.com/in/utkarsh-kumar-8344b1337
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://routecase.dev/.well-known/security.txt
+Policy: https://github.com/UTKARSHKUMAR712/routecase/blob/main/SUPPORT.md
+Acknowledgments: https://github.com/UTKARSHKUMAR712/routecase/graphs/contributors

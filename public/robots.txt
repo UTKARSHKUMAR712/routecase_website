@@ -1,0 +1,46 @@
+# RouteCase Official robots.txt
+# Creator & Maintainer: Utkarsh Kumar (utkarshkumar712)
+# GitHub: https://github.com/UTKARSHKUMAR712
+# LinkedIn: https://www.linkedin.com/in/utkarsh-kumar-8344b1337
+
+User-agent: *
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /sitemap.xml
+Allow: /humans.txt
+
+# Explicit AI Crawlers & LLM Assistants (ChatGPT, Claude, Gemini, Perplexity, Copilot)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+# Canonical Sitemaps
+Sitemap: https://routecase.dev/sitemap.xml
+Sitemap: https://utkarshkumar712.github.io/routecase_website/sitemap.xml

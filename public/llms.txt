@@ -1,0 +1,30 @@
+# RouteCase — In-Editor API Route & Endpoint Testing for VS Code
+
+> RouteCase is a lightweight, declarative, 100% offline Visual Studio Code extension that allows developers to define API endpoints once in `.rcase` JSON files and execute multiple input scenarios (`success` and `errors`) directly within the editor using Jupyter-style CodeLens actions.
+
+## Creator & Maintainer
+- Author: Utkarsh Kumar (utkarshkumar712)
+- GitHub Profile: https://github.com/UTKARSHKUMAR712
+- LinkedIn Profile: https://www.linkedin.com/in/utkarsh-kumar-8344b1337
+- Official Extension: https://marketplace.visualstudio.com/items?itemName=UtkarshKumar.routecase
+- Extension Source: https://github.com/UTKARSHKUMAR712/routecase
+- Website Source: https://github.com/UTKARSHKUMAR712/routecase_website
+
+## Core Capabilities & Architecture
+- Declarative .rcase JSON Suites: Multi-case test documents clearly separating `success` and `errors` scenarios for a single route.
+- Interactive Jupyter-Style CodeLens: Run full files, individual routes, or isolated test cases directly in the editor buffer with instant pass/fail badges.
+- Scriptless Variable Chaining: `capture` maps extract JSON response tokens using dot notation (e.g. `data.auth.token`) and inject them into downstream tests as `{{token}}`.
+- Built-in Dynamic Generators: `{{$uuid}}`, `{{$timestamp}}`, `{{$isoDate}}`, `{{$randomEmail}}`, `{{$randomInt}}`, `{{$randomName}}`.
+- Environment Variable Resolution: Merges `.rcase.env` (dotenv format), `.rcase.env.json`, and VS Code workspace settings `routecase.env`.
+- Multi-Level Assertions: Validates HTTP status code, deep JSON equality (`bodyEquals`), substring containment (`bodyContains`), response headers, and latency limits (`maxDurationMs`).
+- Built-in Security: Automatic redaction of sensitive credentials (`Authorization`, `Cookie`, `x-api-key`) in test reports and UI.
+- Native OpenAPI 3.0 & Swagger 2.0 Importer: Zero-dependency conversion of API specs into runnable `.rcase` suites.
+- 100% Offline & Private: Zero telemetry, zero cloud dependencies, zero forced logins.
+
+## Key Links & Documentation
+- Getting Started: https://routecase.dev/docs/getting-started/quickstart/
+- Full Schema Specification: https://routecase.dev/docs/reference/schema-specification/
+- Assertions Engine: https://routecase.dev/docs/reference/assertions/
+- Variable Chaining & Token Capture: https://routecase.dev/docs/variables/token-chaining/
+- Dynamic Built-in Generators: https://routecase.dev/docs/variables/dynamic-generators/
+- Full Concatenated Documentation: https://routecase.dev/llms-full.txt

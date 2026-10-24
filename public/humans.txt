@@ -1,0 +1,22 @@
+/* TEAM */
+Creator, Lead Developer & Architect: Utkarsh Kumar (utkarshkumar712)
+GitHub: https://github.com/UTKARSHKUMAR712
+LinkedIn: https://www.linkedin.com/in/utkarsh-kumar-8344b1337
+Role: Full-Stack Developer, VS Code Extension Author & Systems Engineer
+
+/* PROJECT */
+Name: RouteCase
+Description: Modern In-Editor API Route & Endpoint Testing for Visual Studio Code
+Website: https://routecase.dev
+Website Repository: https://github.com/UTKARSHKUMAR712/routecase_website
+Extension Repository: https://github.com/UTKARSHKUMAR712/routecase
+Marketplace: https://marketplace.visualstudio.com/items?itemName=UtkarshKumar.routecase
+License: MIT License
+
+/* TECHNOLOGY */
+Framework: Astro & Starlight
+Language: TypeScript
+Runtime: Node.js
+Styling: Custom Emerald & Obsidian Design System
+SEO: Schema.org, OpenGraph, JSON-LD, Robots, llms.txt
+Zero Cloud Dependencies. 100% Offline by Default.

@@ -1,0 +1,26 @@
+{
+  "name": "routecase-website",
+  "version": "0.2.0",
+  "description": "Official marketing website and comprehensive documentation portal for RouteCase by Utkarsh Kumar (utkarshkumar712)",
+  "author": "Utkarsh Kumar <utkarshkumar712> (https://github.com/UTKARSHKUMAR712)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/UTKARSHKUMAR712/routecase_website.git"
+  },
+  "homepage": "https://routecase.dev",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@astrojs/starlight": "^0.42.7",
+    "astro": "^7.4.2",
+    "sharp": "^0.35.5"
+  }
+}
