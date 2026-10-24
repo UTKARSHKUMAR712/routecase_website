@@ -1,13 +1,13 @@
 {
   "name": "routecase-website",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Official marketing website and comprehensive documentation portal for RouteCase by Utkarsh Kumar (utkarshkumar712)",
   "author": "Utkarsh Kumar <utkarshkumar712> (https://github.com/UTKARSHKUMAR712)",
   "repository": {
     "type": "git",
     "url": "https://github.com/UTKARSHKUMAR712/routecase_website.git"
   },
-  "homepage": "https://routecase.dev",
+  "homepage": "https://routecase.vercel.app",
   "license": "MIT",
   "type": "module",
   "scripts": {

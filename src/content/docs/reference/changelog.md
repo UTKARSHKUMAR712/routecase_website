@@ -8,6 +8,18 @@ RouteCase adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
+## [0.2.1] - 2026-10-25
+
+### 🌐 Documentation & Production Release
+
+#### Added & Improved
+- **Official Documentation Portal & Website**: Launched and deployed the official production website and docs portal at [https://routecase.vercel.app](https://routecase.vercel.app).
+- **Activity Bar Brand Icon**: Modernized activity bar container icon with the 3-node connected route graph vector.
+- **Obsidian & Emerald Visual Identity**: Full rebrand to Obsidian Slate (`#0B0F17`) and Vibrant Emerald (`#10B981`) / Mint (`#34D399`) color system.
+- **AI Agent Discovery**: Added full `llms.txt`, `llms-full.txt`, and `robots.txt` manifests for automated LLM crawler discovery.
+
+---
+
 ## [0.2.0] - 2026-10-24
 
 ### 🚀 Major Feature Release
